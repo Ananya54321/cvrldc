@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <h1>Literary and Debate Club, CVR</h1>
-      <p>Coming soon! {":)"}</p>
+      <h2>Coming soon! {":)"}</h2>
     </div>
   );
 }
