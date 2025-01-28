@@ -6,7 +6,8 @@ import "./App.css";
 function App() {
   return (
     <div>
-      <h1>Literature and Debate Club, CVR</h1>
+      <h1>Literary and Debate Club, CVR</h1>
+      <p>Coming soon! {":)"}</p>
     </div>
   );
 }
