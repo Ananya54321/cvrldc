@@ -4,7 +4,7 @@ import homebg from "@/../public/homebg.jpg";
 
 const Hero = () => {
   return (
-    <div className="p-40 flex items-center justify-center relative overflow-hidden">
+    <div className="p-48 flex items-center justify-center relative overflow-hidden">
       <Image
         src={homebg}
         alt="homebg"
