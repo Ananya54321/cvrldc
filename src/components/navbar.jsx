@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <nav className="sticky top-0 bg-white text-lg p-4 z-20 shadow-md">
-      <div className="flex justify-between items-center max-w-6xl mx-auto">
+      <div className="flex justify-between items-center  mx-auto">
         {/* Logo Section */}
         <div className="flex items-center gap-4">
           <Image
@@ -30,12 +30,12 @@ const Navbar = () => {
           <Link href="/gallery">Gallery</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/verticals">Verticals</Link>
-          <Link
-            href="/join-us"
-            className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90">
-            Join us
-          </Link>
         </div>
+        <Link
+          href="/join-us"
+          className="bg-primary hidden md:flex text-white px-4 py-2 rounded-lg hover:bg-opacity-90">
+          Join us
+        </Link>
 
         {/* Mobile Menu Button */}
         <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
