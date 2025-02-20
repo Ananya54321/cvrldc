@@ -1,0 +1,4 @@
+primary - #352C21
+secondary - #ECDEBC
+accent - #BF8B41
+ternary - #464936
