@@ -1,7 +1,40 @@
-import React from "react";
-import { upcomingEvents } from "@/constants/data.js";
-
+"use client";
+import React, { useState, useEffect } from "react";
+import { getEvents } from "../../../../actions/eventActions";
+import { useRouter } from "next/navigation";
 const UpcomingEvents = () => {
+  const router = useRouter();
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [navigating, setNavigating] = useState(false);
+  useEffect(() => {
+    const loadEvents = async () => {
+      try {
+        const response = await getEvents();
+        setEvents(response);
+      } catch (err) {
+        console.error("Error fetching events:", err);
+      } finally {
+        setLoading(false); // Hide loading animation
+      }
+    };
+
+    loadEvents();
+  }, []);
+  const goToEvents = () => {
+    setNavigating(true);
+    setTimeout(() => {
+      router.push("/events/view");
+    }, 500);
+  };
+
+  if (loading || navigating) {
+    return (
+      <div className="flex justify-center items-center min-h-screen bg-secondary">
+        <div className="w-16 h-16 border-4 border-gray-300 border-t-accent rounded-full animate-spin"></div>
+      </div>
+    );
+  }
   return (
     <div className="bg-secondary text-primary py-16 px-8" id="events">
       <div className="max-w-6xl mx-auto">
@@ -10,11 +43,12 @@ const UpcomingEvents = () => {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {upcomingEvents.map((event, index) => (
+          {events.map((event, index) => (
             <div
-              key={event.id}
+              key={index}
               className="animate-on-scroll bg-ternary rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all"
-              id={`event-${event.id}`}>
+              id={`event-${index}`}
+            >
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={event.image}
@@ -24,7 +58,11 @@ const UpcomingEvents = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
                 <div className="absolute bottom-0 left-0 p-4">
                   <span className="bg-accent text-white px-3 py-1 rounded-full text-sm">
-                    {event.date}
+                    {new Date(event.eventDate).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "2-digit",
+                      year: "2-digit",
+                    })}
                   </span>
                 </div>
               </div>
@@ -35,7 +73,13 @@ const UpcomingEvents = () => {
                 </h3>
                 <div className="flex items-center mb-4 text-white/80">
                   <span className="mr-4 bg-primary/20 text-center rounded-lg p-1 text-sm">
-                    {event.time}
+                    {new Date(
+                      `1970-01-01T${event.eventTime}`
+                    ).toLocaleTimeString("en-US", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: true,
+                    })}
                   </span>
                   <span className="bg-primary/20 text-center rounded-lg p-1 px-2 text-sm">
                     {event.location}
@@ -51,7 +95,10 @@ const UpcomingEvents = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <button className="border-2 bg-primary border-[#e5a970] text-secondary hover:bg-primary/80 px-8 py-3 rounded-lg text-xl transition-all">
+          <button
+            className="border-2 bg-primary border-[#e5a970] text-secondary hover:bg-primary/80 px-8 py-3 rounded-lg text-xl transition-all"
+            onClick={goToEvents}
+          >
             View All Events
           </button>
         </div>
