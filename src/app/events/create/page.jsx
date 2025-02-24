@@ -10,6 +10,7 @@ import {
   Link,
   MapPin,
 } from "lucide-react";
+import { toast } from "sonner";
 
 function CreateEvent() {
   const [event, setEvent] = useState({
@@ -44,10 +45,8 @@ function CreateEvent() {
     console.log("Submitting event details:", eventDetails);
 
     if (eventDetails.success) {
+      toast.success("Event created successfully");
       console.log(eventDetails.message);
-      if (event.link) {
-        window.open(event.link, "_blank");
-      }
     } else {
       console.log(eventDetails.message);
     }
@@ -113,8 +112,7 @@ function CreateEvent() {
                 value={event.vertical}
                 onChange={handleChange}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
-                required
-              >
+                required>
                 <option value="">Select Vertical</option>
                 {options.map((option) => (
                   <option key={option.value} value={option.value}>
@@ -205,8 +203,7 @@ function CreateEvent() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200 flex items-center justify-center"
-            >
+              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200 flex items-center justify-center">
               <Clock className="w-4 h-4 mr-2" />
               Create Event
             </button>

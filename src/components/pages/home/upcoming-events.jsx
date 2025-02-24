@@ -42,13 +42,12 @@ const UpcomingEvents = () => {
           Upcoming Events
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event, index) => (
             <div
               key={index}
-              className="animate-on-scroll bg-ternary rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all"
-              id={`event-${index}`}
-            >
+              className="animate-on-scroll bg-ternary rounded-xl overflow-hidden shadow-lg group hover:shadow-2xltransition-all"
+              id={`event-${index}`}>
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={event.image}
@@ -85,10 +84,14 @@ const UpcomingEvents = () => {
                     {event.location}
                   </span>
                 </div>
-                <p className="text-white/90 mb-6">{event.description}</p>
-                <button className="w-full bg-accent text-primary py-2 rounded-lg hover:bg-[#e5a970] transition-all font-medium">
-                  Register Now
-                </button>
+                <div className="h-full">
+                  <p className="text-white/90 min-h-16 mb-6">
+                    {event.description}
+                  </p>
+                  <button className="w-full bg-accent text-primary py-2 rounded-lg hover:bg-[#e5a970] transition-all font-medium">
+                    Register Now
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -97,8 +100,7 @@ const UpcomingEvents = () => {
         <div className="mt-16 text-center">
           <button
             className="border-2 bg-primary border-[#e5a970] text-secondary hover:bg-primary/80 px-8 py-3 rounded-lg text-xl transition-all"
-            onClick={goToEvents}
-          >
+            onClick={goToEvents}>
             View All Events
           </button>
         </div>

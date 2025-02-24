@@ -50,7 +50,6 @@ export async function getEvents() {
       _id: event._id.toString(),
       eventDate: event.eventDate.toISOString(),
     }));
-    
   } catch (err) {
     return {
       success: false,
@@ -83,21 +82,20 @@ export async function getEventsWithFilter(vertical) {
 
 export async function updateEventDetails(vertical, title, updatedFields) {
   try {
-
     if (Object.keys(updatedFields).length === 0) {
       return {
         success: false,
         message: "No valid fields provided for update.",
       };
     }
-    
+
     const updatedDetails = await Event.findOneAndUpdate(
       { vertical: vertical, title: title },
       { $set: updatedFields },
       { new: true, runValidators: true }
     );
 
-    console.log("x",updatedDetails);
+    console.log("x", updatedDetails);
     if (!updatedDetails) {
       return {
         success: false,

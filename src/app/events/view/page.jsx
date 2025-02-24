@@ -29,8 +29,7 @@ function ViewEvent() {
             events.map((event) => (
               <div
                 key={event._id}
-                className="bg-white shadow-md rounded-lg p-6 border border-gray-200"
-              >
+                className="bg-white shadow-md rounded-lg p-6 border border-gray-200">
                 <h2 className="text-2xl font-semibold text-blue-600">
                   {event.title}
                 </h2>
@@ -72,8 +71,7 @@ function ViewEvent() {
                       href={event.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
-                    >
+                      className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
                       🔗 Visit Event
                     </a>
                   </div>
