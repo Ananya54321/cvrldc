@@ -2,6 +2,7 @@
 import bcrypt from 'bcryptjs';
 import User from '../models/user';
 import connectDb from '../utils/db';
+import jwt from "jsonwebtoken";
 connectDb();
 export async function loginUser(username,password){
     try{
@@ -20,10 +21,14 @@ export async function loginUser(username,password){
                 message:'Invalid credentials',
             }
         }
+        const token=await jwt.sign({id:user._id},process.env.NEXT_PUBLIC_JWT_SECRET,{
+            expiresIn:'1d',
+        })
+        console.log('Token',token);
         return {
             success:true,
             message:'Login successful',
-            user,
+            token
         }
     }catch(err){
         return {
@@ -47,9 +52,11 @@ export async function RegisterUser(username,email,password){
         const hashedPassword=await bcrypt.hash(password,10);
         const newUser=new User({username,email,password:hashedPassword});
         await newUser.save();
+        
         return {
             success:true,
             message:'User registered successfully',
+            
         }
     }catch(err){
         return {

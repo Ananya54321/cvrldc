@@ -13,7 +13,8 @@ function Login() {
     e.preventDefault();
     const data = await loginUser(username, password);
     if (data.success) {
-      console.log("User registered successfully");
+      console.log("User logged in successfully");
+      localStorage.setItem("token",data.token);
       router.push("/");
     } else {
       console.log(data.message);
