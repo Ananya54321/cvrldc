@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { RegisterUser } from "../../../actions/userActions";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
 
 function Register() {
   const router = useRouter();
@@ -13,7 +15,7 @@ function Register() {
     e.preventDefault();
     const data = await RegisterUser(username, email, password);
     if (data.success) {
-      console.log("User registered successfully");
+      toast.success("User registered successfully");
       router.push("/");
     } else {
       console.log(data.message);

@@ -3,10 +3,10 @@ import bcrypt from 'bcryptjs';
 import User from '../models/user';
 import connectDb from '../utils/db';
 import jwt from "jsonwebtoken";
-connectDb();
+
 export async function loginUser(username,password){
     try{
-       
+       await connectDb();
         const user=await User.findOne({username});
         if(!user){
             return {
@@ -40,7 +40,7 @@ export async function loginUser(username,password){
 }
 export async function RegisterUser(username,email,password){
     try{
-       
+      await connectDb();
         const existingUser = await User.findOne({ username });
         console.log('Register user');
         if(existingUser){
