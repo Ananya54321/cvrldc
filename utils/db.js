@@ -1,14 +1,15 @@
-import mongoose from "mongoose";
-const MONGO_URI = process.env.NEXT_PUBLIC_MONGOURI;
+import { connect } from "mongoose";
 
-export default async function connectDb() {
+const connectDB = async () => {
   try {
-    await mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true,
+    const conn = await connect(process.env.NEXT_PUBLIC_MONGO_URI, {
       useUnifiedTopology: true,
+      useNewUrlParser: true,
     });
-    console.log("Connected!");
-  } catch (e) {
-    console.log("Error caught while connecting to DB ", e);
+    console.log(`MongoDB Connected: ${conn.connection.host}`);
+  } catch (err) {
+    console.error(err);
   }
-}
+};
+
+export default connectDB;

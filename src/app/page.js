@@ -3,7 +3,8 @@ import Hero from "@/components/pages/home/hero.jsx";
 import Announcements from "@/components/pages/home/announcements.jsx";
 import UpcomingEvents from "@/components/pages/home/upcoming-events.jsx";
 import Achievements from "@/components/pages/home/achievements.jsx";
-import WhyJoin from "@/components/pages/home/whyjoin";
+import WhyJoin from "@/components/pages/home/whyldc";
+import Faculty from "@/components/pages/home/faculty";
 const Page = () => {
   return (
     <>
@@ -19,6 +20,7 @@ const Page = () => {
       {/* Why Join LDC Section */}
       <WhyJoin />
       {/* Contact Section */}
+      <Faculty />
       <footer className="bg-secondary text-primary py-6 text-center">
         <div className="max-w-4xl mx-auto">
           <p>
