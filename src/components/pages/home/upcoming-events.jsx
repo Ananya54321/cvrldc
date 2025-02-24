@@ -86,7 +86,7 @@ const UpcomingEvents = () => {
                   </span>
                 </div>
                 <p className="text-white/90 mb-6">{event.description}</p>
-                <button className="w-full bg-accent text-primary py-2 rounded-lg hover:bg-accent/80 transition-all font-medium">
+                <button className="w-full bg-accent text-primary py-2 rounded-lg hover:bg-[#e5a970] transition-all font-medium">
                   Register Now
                 </button>
               </div>
