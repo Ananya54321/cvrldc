@@ -285,3 +285,12 @@ body {
   font-size: 4rem;
   color: rgba(191, 139, 65, 0.2);
 }
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

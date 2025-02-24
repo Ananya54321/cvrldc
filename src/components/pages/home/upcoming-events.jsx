@@ -13,7 +13,7 @@ const UpcomingEvents = () => {
           {upcomingEvents.map((event, index) => (
             <div
               key={event.id}
-              className="animate-on-scroll bg-ternary rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all"
+              className="animate-on-scroll flex flex-col justify-between bg-ternary rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all"
               id={`event-${event.id}`}>
               <div className="relative h-48 overflow-hidden">
                 <img
@@ -42,7 +42,7 @@ const UpcomingEvents = () => {
                   </span>
                 </div>
                 <p className="text-white/90 mb-6">{event.description}</p>
-                <button className="w-full bg-accent text-primary py-2 rounded-lg hover:bg-accent/80 transition-all font-medium">
+                <button className="w-full bg-accent text-primary py-2 rounded-lg hover:bg-[#e5a970] transition-all font-medium">
                   Register Now
                 </button>
               </div>
