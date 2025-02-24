@@ -37,6 +37,10 @@ body {
   background-color: #bf8b41;
 }
 
+.border-accent {
+  border-color: #bf8b41;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -112,15 +116,6 @@ body {
 }
 .fuzzyfont {
   font-family: "Fuzzy Bubbles", Helvetica, sans-serif;
-}
-
-.gold-gradient {
-  background: linear-gradient(to right, #bf8b41, #ffc773, #bf8b41);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shimmer 2s infinite linear;
-  background-size: 200% 100%;
 }
 
 @keyframes shimmer {
