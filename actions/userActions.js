@@ -28,7 +28,8 @@ export async function loginUser(username,password){
         return {
             success:true,
             message:'Login successful',
-            token
+            token,
+            user:JSON.stringify(user)
         }
     }catch(err){
         return {

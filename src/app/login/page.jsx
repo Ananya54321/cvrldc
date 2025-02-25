@@ -19,6 +19,7 @@ function Login() {
       toast.success("User logged in successfully");
       setIsLoading(false);
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user", data.user);
       router.push("/");
     } else {
       setIsLoading(false);

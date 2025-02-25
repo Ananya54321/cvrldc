@@ -1,13 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { addBlog, getAllBlogs } from "../../../actions/blogActions";
+import { addBlog, deleteBlog, getAllBlogs, updateBlog } from "../../../actions/blogActions";
 import { toast } from "sonner";
 const page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [blogs, setAllBlogs] = useState();
+  const [blogs, setAllBlogs] = useState([]);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -21,18 +21,17 @@ const page = () => {
   
     fetchBlogs(); // Call the async function
   }, []);
-  console.log(blogs);
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const token = localStorage.getItem("token");
+  console.log(blogs)
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));;
+
+ 
+  const handleDelete = async (id) => {
     if (!token) {
-      return toast.error("Log in to create blog");
+      return toast.error("Log in to delete blog");
     }
-    const res = await addBlog(title, content, token);
+    const res = await deleteBlog(id, token);
     if (res.success) {
-      setTitle("");
-      setContent("");
-      setIsModalOpen(false);
       toast.success(res.message);
       const fetchBlogs = async () => {
         const res = await getAllBlogs(); // Await the promise
@@ -47,8 +46,53 @@ const page = () => {
       toast.error(res.message);
     }
     console.log(res);
-    setIsModalOpen(false);
   };
+
+  const [editingBlogId, setEditingBlogId] = useState(null); // Track which blog is being edited
+
+const handleUpdate = (id, t, c) => {
+  setEditingBlogId(id); // Store the blog ID being edited
+  setTitle(t);
+  setContent(c);
+  setIsModalOpen(true);
+};
+const fetchBlogs = async () => {
+  const res = await getAllBlogs();
+  if (res.success) {
+    setAllBlogs(res.blogs);
+  } else {
+    console.error(res.message);
+  }
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  if (!token) {
+    return toast.error("Log in to create or edit a blog");
+  }
+
+  let res;
+  if (editingBlogId) {
+    // If editing, update the blog
+    res = await updateBlog(editingBlogId, title, content, token);
+  } else {
+    // If not editing, create a new blog
+    res = await addBlog(title, content, token);
+  }
+
+  if (res.success) {
+    setTitle("");
+    setContent("");
+    setIsModalOpen(false);
+    setEditingBlogId(null);
+    toast.success(res.message);
+    fetchBlogs();
+  } else {
+    toast.error(res.message);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-[#ECDEBC]">
@@ -81,7 +125,7 @@ const page = () => {
         blogs&&
         <div className="grid grid-cols-2 gap-4 mb-12">
           {blogs.map((blog) => (
-            <div key={blog._id} className="p-6">
+            <div key={blog._id} className="p-6 border-2 rounded-lg m-4">
               <h3 className="text-xl font-bold text-[#BF8B41] mb-2">
                 {blog.title}
               </h3>
@@ -92,6 +136,28 @@ const page = () => {
                 className="bg-[#BF8B41] hover:bg-[#464936] text-[#ECDEBC] font-bold py-2 px-4 rounded-lg transition duration-300">
                 Read More
               </button>
+              {
+                blog.createdBy && user &&blog.createdBy._id===user._id&&(
+                 
+                  <button
+                   onClick={()=>handleDelete(blog._id)}
+                    className="text-[#BF8B41] hover:text-[#BF8B41] ml-2 bg-[#ECDEBC] px-4 py-2 rounded-lg border-2 border-[#BF8B41] transition duration-200">
+                    Delete
+                  </button>
+                )
+
+              }
+              {
+                blog.createdBy && user &&blog.createdBy._id===user._id&&(
+                  <button
+                   onClick={()=>handleUpdate(blog._id,blog.title,blog.content)}
+                    className="text-[#BF8B41] hover:text-[#BF8B41] ml-2 bg-[#ECDEBC] px-4 py-2 rounded-lg border-2 border-[#BF8B41] transition duration-200">
+                    Edit
+                  </button>
+                )
+
+              }
+              
             </div>
           ))}
         </div>
