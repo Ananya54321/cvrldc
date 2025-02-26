@@ -1,7 +1,9 @@
 "use server";
 import Event from "../models/event";
 import connectDb from "../utils/db";
-connectDb().then(() => console.log("Database connected"));
+connectDb()
+  .then(() => console.log("Database connected"))
+  .catch(() => console.log("Database connection failed"));
 
 export async function postEvent(eventData) {
   try {

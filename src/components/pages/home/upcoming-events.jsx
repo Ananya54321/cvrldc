@@ -11,6 +11,7 @@ const UpcomingEvents = () => {
     const loadEvents = async () => {
       try {
         const response = await getEvents();
+        console.log(response);
         setEvents(response);
       } catch (err) {
         console.error("Error fetching events:", err);
