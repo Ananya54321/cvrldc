@@ -11,6 +11,7 @@ import {
   MapPin,
 } from "lucide-react";
 import { toast } from "sonner";
+import { redirect } from "next/navigation";
 
 function CreateEvent() {
   const [event, setEvent] = useState({
@@ -47,6 +48,7 @@ function CreateEvent() {
     if (eventDetails.success) {
       toast.success("Event created successfully");
       console.log(eventDetails.message);
+      redirect("/events/view");
     } else {
       console.log(eventDetails.message);
     }
