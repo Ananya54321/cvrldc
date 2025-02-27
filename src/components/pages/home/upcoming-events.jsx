@@ -2,26 +2,47 @@
 import React, { useState, useEffect } from "react";
 import { getEvents } from "../../../../actions/eventActions";
 import { useRouter } from "next/navigation";
+
 const UpcomingEvents = () => {
   const router = useRouter();
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [navigating, setNavigating] = useState(false);
+
+  const pics = [
+    {
+      vertical: "stp",
+      link: "/stp.jpg",
+    },
+    {
+      vertical: "shared-shelf",
+      link: "/shared.jpg",
+    },
+    {
+      vertical: "eclectics",
+      link: "/quiz.jpg",
+    },
+    {
+      vertical: "writers-space",
+      link: "/writers.jpeg",
+    },
+  ];
+
   useEffect(() => {
     const loadEvents = async () => {
       try {
         const response = await getEvents();
-        console.log(response);
         setEvents(response);
       } catch (err) {
         console.error("Error fetching events:", err);
       } finally {
-        setLoading(false); // Hide loading animation
+        setLoading(false);
       }
     };
 
     loadEvents();
   }, []);
+
   const goToEvents = () => {
     setNavigating(true);
     setTimeout(() => {
@@ -36,6 +57,7 @@ const UpcomingEvents = () => {
       </div>
     );
   }
+
   return (
     <div className="bg-secondary text-primary py-16 px-8" id="events">
       <div className="max-w-6xl mx-auto">
@@ -43,65 +65,70 @@ const UpcomingEvents = () => {
           Upcoming Events
         </h2>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {events.map((event, index) => (
-            <div
-              key={index}
-              className="animate-on-scroll bg-ternary rounded-xl overflow-hidden shadow-lg group hover:shadow-2xltransition-all"
-              id={`event-${index}`}>
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={event.image}
-                  alt={event.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                <div className="absolute bottom-0 left-0 p-4">
-                  <span className="bg-accent text-white px-3 py-1 rounded-full text-sm">
-                    {new Date(event.eventDate).toLocaleDateString("en-GB", {
-                      day: "2-digit",
-                      month: "2-digit",
-                      year: "2-digit",
-                    })}
-                  </span>
-                </div>
-              </div>
+        <div className="grid md:grid-cols-3 gap-8">
+          {events.map((event, index) => {
+            const eventPicture = pics.find(
+              (pic) => pic.vertical === event.vertical
+            );
+            const imageSrc = eventPicture ? eventPicture.link : event.image;
 
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2 text-accent">
-                  {event.title}
-                </h3>
-                <div className="flex items-center mb-4 text-white/80">
-                  <span className="mr-4 bg-primary/20 text-center rounded-lg p-1 text-sm">
-                    {new Date(
-                      `1970-01-01T${event.eventTime}`
-                    ).toLocaleTimeString("en-US", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                      hour12: true,
-                    })}
-                  </span>
-                  <span className="bg-primary/20 text-center rounded-lg p-1 px-2 text-sm">
-                    {event.location}
-                  </span>
+            return (
+              <div
+                key={index}
+                className="animate-on-scroll bg-ternary rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all"
+                id={`event-${index}`}
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={imageSrc}
+                    alt={event.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 p-4">
+                    <span className="bg-accent text-white px-3 py-1 rounded-full text-sm">
+                      {new Date(event.eventDate).toLocaleDateString("en-GB", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "2-digit",
+                      })}
+                    </span>
+                  </div>
                 </div>
-                <div className="h-full">
-                  <p className="text-white/90 min-h-16 mb-6">
-                    {event.description}
-                  </p>
+
+                <div className="p-6">
+                  <h3 className="text-2xl font-bold mb-2 text-accent">
+                    {event.title}
+                  </h3>
+                  <div className="flex items-center mb-4 text-white/80">
+                    <span className="mr-4 bg-primary/20 text-center rounded-lg p-1 text-sm">
+                      {new Date(
+                        `1970-01-01T${event.eventTime}`
+                      ).toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        hour12: true,
+                      })}
+                    </span>
+                    <span className="bg-primary/20 text-center rounded-lg p-1 px-2 text-sm">
+                      {event.location}
+                    </span>
+                  </div>
+                  <p className="text-white/90 mb-6">{event.description}</p>
                   <button className="w-full bg-accent text-primary py-2 rounded-lg hover:bg-[#e5a970] transition-all font-medium">
                     Register Now
                   </button>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-16 text-center">
           <button
             className="border-2 bg-primary border-[#e5a970] text-secondary hover:bg-primary/80 px-8 py-3 rounded-lg text-xl transition-all"
-            onClick={goToEvents}>
+            onClick={goToEvents}
+          >
             View All Events
           </button>
         </div>
