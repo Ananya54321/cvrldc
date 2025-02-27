@@ -7,24 +7,28 @@ import { toast } from "sonner";
 function Login() {
   const router = useRouter();
   const [username, setUsername] = useState("");
-
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    
     const data = await loginUser(username, password);
+    
     if (data.success) {
       toast.success("User logged in successfully");
-      setIsLoading(false);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", data.user);
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user)); // Store user safely as JSON
+      }
+
       router.push("/");
     } else {
-      setIsLoading(false);
-      console.log(data.message);
+      toast.error(data.message || "Login failed");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -51,20 +55,18 @@ function Login() {
             className="border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             required
           />
-          {isLoading ? (
-            <button
-              type="submit"
-              className="bg-blue-400 text-white py-3 rounded-lg hover:bg-blue-500 transition duration-300"
-              disabled>
-              Loading...
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-300">
-              Login
-            </button>
-          )}
+          
+          <button
+            type="submit"
+            className={`py-3 rounded-lg text-white transition duration-300 ${
+              isLoading
+                ? "bg-blue-400 cursor-not-allowed"
+                : "bg-blue-500 hover:bg-blue-600"
+            }`}
+            disabled={isLoading}
+          >
+            {isLoading ? "Loading..." : "Login"}
+          </button>
         </form>
       </div>
     </div>

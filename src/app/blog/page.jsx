@@ -9,13 +9,19 @@ const page = () => {
   const [content, setContent] = useState("");
   const [blogs, setAllBlogs] = useState([]);
   const [expandedBlog, setExpandedBlog] = useState(null);
+  const [token, setToken] = useState(null);
+const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setToken(localStorage.getItem("token"));
+      setUser(JSON.parse(localStorage.getItem("user")));
+    }
+  },[]);
   useEffect(() => {
     fetchBlogs();
   }, []);
 
-  const token = localStorage.getItem("token");
-  const user = JSON.parse(localStorage.getItem("user"));
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -173,20 +179,8 @@ const page = () => {
                       )}
                     </div>
 
-                    {/* Engagement Metrics */}
-                    <div className="flex items-center space-x-4 text-[#ECDEBC]/70">
-                      <button className="flex items-center hover:text-[#BF8B41] transition duration-300">
-                        <ThumbsUp size={18} className="mr-1" />
-                        <span>{Math.floor(Math.random() * 50)}</span>
-                      </button>
-                      <button className="flex items-center hover:text-[#BF8B41] transition duration-300">
-                        <MessageCircle size={18} className="mr-1" />
-                        <span>{Math.floor(Math.random() * 20)}</span>
-                      </button>
-                      <button className="flex items-center hover:text-[#BF8B41] transition duration-300">
-                        <Share2 size={18} />
-                      </button>
-                    </div>
+                    
+                   
                   </div>
                 </div>
               </div>
