@@ -19,9 +19,9 @@ function ViewEvent() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+    <div className="min-h-screen bg-secondary p-6">
+      <div className="max-w-5xl mx-auto text-secondary">
+        <h1 className="text-3xl font-bold titlefont text-center text-primary mb-6">
           📅 Upcoming Events
         </h1>
         <div className="space-y-6">
@@ -29,19 +29,19 @@ function ViewEvent() {
             events.map((event) => (
               <div
                 key={event._id}
-                className="bg-white shadow-md rounded-lg p-6 border border-gray-200">
-                <h2 className="text-2xl font-semibold text-blue-600">
+                className="bg-ternary shadow-md rounded-lg p-6 border border-gray-200">
+                <h2 className="text-2xl font-semibold text-accent">
                   {event.title}
                 </h2>
-                <p className="text-gray-700 mt-2">{event.description}</p>
+                <p className="text-white mt-2">{event.description}</p>
 
                 <div className="mt-4 grid grid-cols-2 gap-4">
                   <p>
-                    <strong className="text-gray-900">📌 Category:</strong>{" "}
+                    <strong className="text-secondary">📌 Category:</strong>{" "}
                     {event.vertical}
                   </p>
                   <p>
-                    <strong className="text-gray-900">
+                    <strong className="text-secondary">
                       📅 Date(DD/MM/YYYY):
                     </strong>
                     {new Date(event.eventDate).toLocaleDateString("en-GB", {
@@ -52,15 +52,15 @@ function ViewEvent() {
                   </p>
 
                   <p>
-                    <strong className="text-gray-900">⏰ Time:</strong>{" "}
+                    <strong className="text-secondary">⏰ Time:</strong>{" "}
                     {event.eventTime}
                   </p>
                   <p>
-                    <strong className="text-gray-900">📍 Location:</strong>{" "}
+                    <strong className="text-secondary">📍 Location:</strong>{" "}
                     {event.location}
                   </p>
                   <p className="col-span-2">
-                    <strong className="text-gray-900">👤 Organized By:</strong>{" "}
+                    <strong className="text-secondary">👤 Organized By:</strong>{" "}
                     {event.organisedBy}
                   </p>
                 </div>
@@ -71,7 +71,7 @@ function ViewEvent() {
                       href={event.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                      className="inline-block bg-accent text-white px-4 py-2 rounded-lg hover:bg-[#FFA500] transition duration-300">
                       🔗 Visit Event
                     </a>
                   </div>
