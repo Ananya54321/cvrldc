@@ -1,7 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Calendar, Clock, MessageCircle, Share2, ThumbsUp, X } from "lucide-react";
-import { addBlog, deleteBlog, getAllBlogs, updateBlog } from "../../../actions/blogActions";
+import { Calendar, Clock, X } from "lucide-react";
+import {
+  addBlog,
+  deleteBlog,
+  getAllBlogs,
+  updateBlog,
+} from "../../../actions/blogActions";
 import { toast } from "sonner";
 const page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,31 +15,30 @@ const page = () => {
   const [blogs, setAllBlogs] = useState([]);
   const [expandedBlog, setExpandedBlog] = useState(null);
   const [token, setToken] = useState(null);
-const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       setToken(localStorage.getItem("token"));
       setUser(JSON.parse(localStorage.getItem("user")));
     }
-  },[]);
+  }, []);
   useEffect(() => {
     fetchBlogs();
   }, []);
 
-
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
   const formatTime = (dateString) => {
-    return new Date(dateString).toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit'
+    return new Date(dateString).toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -71,7 +75,7 @@ const [user, setUser] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!token) {
       return toast.error("Log in to create or edit a blog");
     }
@@ -104,7 +108,8 @@ const [user, setUser] = useState(null);
               LDC Community Blog
             </h1>
             <p className="text-xl mb-6 text-[#ECDEBC]">
-              Share your thoughts, connect with others, and explore diverse perspectives in our vibrant community.
+              Share your thoughts, connect with others, and explore diverse
+              perspectives in our vibrant community.
             </p>
 
             <img
@@ -124,19 +129,28 @@ const [user, setUser] = useState(null);
         {blogs && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12 max-w-6xl mx-auto">
             {blogs.map((blog) => (
-              <div key={blog._id} className="bg-[#352C21] rounded-lg overflow-hidden shadow-xl transition-transform duration-300 hover:scale-102">
+              <div
+                key={blog._id}
+                className="bg-[#352C21] rounded-lg overflow-hidden shadow-xl transition-transform duration-300 hover:scale-102">
                 <div className="p-6">
                   {/* Author Info */}
                   <div className="flex items-center mb-4">
                     <div className="w-12 h-12 rounded-full bg-[#BF8B41] flex items-center justify-center">
                       <img
-                        src={blog.createdBy?.avatar || `https://ui-avatars.com/api/?name=${blog.createdBy?.username || 'Anonymous'}&background=BF8B41&color=fff`}
+                        src={
+                          blog.createdBy?.avatar ||
+                          `https://ui-avatars.com/api/?name=${
+                            blog.createdBy?.username || "Anonymous"
+                          }&background=BF8B41&color=fff`
+                        }
                         alt="Author"
                         className="w-12 h-12 rounded-full object-cover"
                       />
                     </div>
                     <div className="ml-4">
-                      <h4 className="text-[#BF8B41] font-semibold">{blog.createdBy?.username || 'Anonymous'}</h4>
+                      <h4 className="text-[#BF8B41] font-semibold">
+                        {blog.createdBy?.username || "Anonymous"}
+                      </h4>
                       <div className="flex items-center text-sm text-[#ECDEBC]/70">
                         <Calendar size={14} className="mr-1" />
                         <span>{formatDate(blog.createdAt)}</span>
@@ -151,36 +165,43 @@ const [user, setUser] = useState(null);
                     {blog.title}
                   </h3>
                   <p className="text-[#ECDEBC] mb-4">
-                    {expandedBlog === blog._id ? blog.content : `${blog.content.slice(0, 150)}...`}
+                    {expandedBlog === blog._id
+                      ? blog.content
+                      : `${blog.content.slice(0, 150)}...`}
                   </p>
 
                   {/* Action Buttons */}
                   <div className="flex items-center justify-between mt-6">
                     <div className="flex space-x-4">
                       <button
-                        onClick={() => setExpandedBlog(expandedBlog === blog._id ? null : blog._id)}
+                        onClick={() =>
+                          setExpandedBlog(
+                            expandedBlog === blog._id ? null : blog._id
+                          )
+                        }
                         className="bg-[#BF8B41] hover:bg-[#464936] text-[#ECDEBC] font-semibold py-2 px-4 rounded-lg transition duration-300">
-                        {expandedBlog === blog._id ? 'Show Less' : 'Read More'}
+                        {expandedBlog === blog._id ? "Show Less" : "Read More"}
                       </button>
-                      
-                      {blog.createdBy && user && blog.createdBy._id === user._id && (
-                        <div className="flex space-x-2">
-                          <button
-                            onClick={() => handleDelete(blog._id)}
-                            className="text-[#BF8B41] hover:text-[#ECDEBC] hover:bg-[#BF8B41] px-4 py-2 rounded-lg border-2 border-[#BF8B41] transition duration-300">
-                            Delete
-                          </button>
-                          <button
-                            onClick={() => handleUpdate(blog._id, blog.title, blog.content)}
-                            className="text-[#BF8B41] hover:text-[#ECDEBC] hover:bg-[#BF8B41] px-4 py-2 rounded-lg border-2 border-[#BF8B41] transition duration-300">
-                            Edit
-                          </button>
-                        </div>
-                      )}
-                    </div>
 
-                    
-                   
+                      {blog.createdBy &&
+                        user &&
+                        blog.createdBy._id === user._id && (
+                          <div className="flex space-x-2">
+                            <button
+                              onClick={() => handleDelete(blog._id)}
+                              className="text-[#BF8B41] hover:text-[#ECDEBC] hover:bg-[#BF8B41] px-4 py-2 rounded-lg border-2 border-[#BF8B41] transition duration-300">
+                              Delete
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleUpdate(blog._id, blog.title, blog.content)
+                              }
+                              className="text-[#BF8B41] hover:text-[#ECDEBC] hover:bg-[#BF8B41] px-4 py-2 rounded-lg border-2 border-[#BF8B41] transition duration-300">
+                              Edit
+                            </button>
+                          </div>
+                        )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -195,7 +216,7 @@ const [user, setUser] = useState(null);
           <div className="bg-[#352C21] rounded-lg w-full max-w-2xl">
             <div className="flex justify-between items-center p-6 border-b border-[#464936]">
               <h2 className="text-2xl font-bold text-[#BF8B41]">
-                {editingBlogId ? 'Edit Blog Post' : 'Create New Blog Post'}
+                {editingBlogId ? "Edit Blog Post" : "Create New Blog Post"}
               </h2>
               <button
                 onClick={() => {
@@ -259,7 +280,7 @@ const [user, setUser] = useState(null);
                 <button
                   type="submit"
                   className="px-6 py-2 bg-[#BF8B41] hover:bg-[#464936] text-[#ECDEBC] font-bold rounded-lg transition duration-200">
-                  {editingBlogId ? 'Update Post' : 'Publish Post'}
+                  {editingBlogId ? "Update Post" : "Publish Post"}
                 </button>
               </div>
             </form>
