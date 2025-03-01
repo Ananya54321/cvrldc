@@ -40,6 +40,7 @@ function ViewEvent() {
                     <strong className="text-secondary">📌 Category:</strong>{" "}
                     {event.vertical}
                   </p>
+
                   <p>
                     <strong className="text-secondary">
                       📅 Date(DD/MM/YYYY):

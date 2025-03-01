@@ -12,7 +12,7 @@ const UpcomingEvents = () => {
   const pics = [
     {
       vertical: "stp",
-      link: "/stp.jpg",
+      link: "/stp.jpeg",
     },
     {
       vertical: "shared-shelf",
@@ -20,11 +20,11 @@ const UpcomingEvents = () => {
     },
     {
       vertical: "eclectics",
-      link: "/quiz.jpg",
+      link: "/quiz.jpeg",
     },
     {
       vertical: "writers-space",
-      link: "/writers.jpeg",
+      link: "/writers.jpg",
     },
   ];
 
@@ -76,8 +76,7 @@ const UpcomingEvents = () => {
               <div
                 key={index}
                 className="animate-on-scroll bg-ternary rounded-xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all"
-                id={`event-${index}`}
-              >
+                id={`event-${index}`}>
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={imageSrc}
@@ -127,8 +126,7 @@ const UpcomingEvents = () => {
         <div className="mt-16 text-center">
           <button
             className="border-2 bg-primary border-[#e5a970] text-secondary hover:bg-primary/80 px-8 py-3 rounded-lg text-xl transition-all"
-            onClick={goToEvents}
-          >
+            onClick={goToEvents}>
             View All Events
           </button>
         </div>

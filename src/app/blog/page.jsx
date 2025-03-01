@@ -104,7 +104,7 @@ const page = () => {
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
           <div className="bg-[#352C21] rounded-lg p-8 shadow-xl">
-            <h1 className="text-4xl font-bold text-[#BF8B41] mb-6">
+            <h1 className="text-4xl titlefont font-bold text-[#BF8B41] mb-6">
               LDC Community Blog
             </h1>
             <p className="text-xl mb-6 text-[#ECDEBC]">
@@ -243,7 +243,7 @@ const page = () => {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   required
-                  className="w-full px-4 py-2 rounded-lg bg-[#464936] border border-[#BF8B41] focus:border-[#ECDEBC] focus:ring-1 focus:ring-[#ECDEBC] outline-none transition duration-200 text-[#ECDEBC] placeholder-[#ECDEBC]/50"
+                  className="w-full px-4 py-2 rounded-lg bg-primary/20 border border-[#BF8B41] focus:border-[#ECDEBC] focus:ring-1 focus:ring-[#ECDEBC] outline-none transition duration-200 text-[#ECDEBC] placeholder-[#ECDEBC]/50"
                   placeholder="Enter your blog title"
                 />
               </div>
@@ -260,7 +260,7 @@ const page = () => {
                   onChange={(e) => setContent(e.target.value)}
                   required
                   rows={6}
-                  className="w-full px-4 py-2 rounded-lg bg-[#464936] border border-[#BF8B41] focus:border-[#ECDEBC] focus:ring-1 focus:ring-[#ECDEBC] outline-none transition duration-200 resize-none text-[#ECDEBC] placeholder-[#ECDEBC]/50"
+                  className="w-full px-4 py-2 rounded-lg bg-primary/20 border border-[#BF8B41] focus:border-[#ECDEBC] focus:ring-1 focus:ring-[#ECDEBC] outline-none transition duration-200 resize-none text-[#ECDEBC] placeholder-[#ECDEBC]/50"
                   placeholder="Share your thoughts..."
                 />
               </div>

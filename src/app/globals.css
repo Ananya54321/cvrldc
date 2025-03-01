@@ -108,14 +108,8 @@ body {
 
 /* extra fonts */
 
-.comic {
-  font-family: "Comic Neue", Helvetica, sans-serif;
-}
 .bangers {
   font-family: "Bangers", Helvetica, sans-serif;
-}
-.fuzzyfont {
-  font-family: "Fuzzy Bubbles", Helvetica, sans-serif;
 }
 
 @keyframes shimmer {
