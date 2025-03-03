@@ -61,10 +61,10 @@ function CreateEvent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+    <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md mx-auto bg-secondary rounded-xl shadow-lg overflow-hidden">
         <div className="px-8 py-6">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-4xl font-bold text-accent titlefont text-center mb-6">
             Create New Event
           </h2>
 
@@ -72,7 +72,7 @@ function CreateEvent() {
             {/* Event Title */}
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Type className="w-4 h-4 mr-2 text-indigo-500" />
+                <Type className="w-4 h-4 mr-2 text-accent" />
                 Event Title
               </label>
               <input
@@ -80,7 +80,7 @@ function CreateEvent() {
                 name="title"
                 value={event.title}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                className="w-full px-4 py-2 border border-accent rounded-lg  "
                 placeholder="Enter event title"
                 required
               />
@@ -89,7 +89,7 @@ function CreateEvent() {
             {/* Event Description */}
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <FileText className="w-4 h-4 mr-2 text-indigo-500" />
+                <FileText className="w-4 h-4 mr-2 text-accent" />
                 Description
               </label>
               <textarea
@@ -97,7 +97,7 @@ function CreateEvent() {
                 value={event.description}
                 onChange={handleChange}
                 rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                className="w-full px-4 py-2 border border-accent rounded-lg  "
                 placeholder="Describe your event"
                 required
               />
@@ -106,14 +106,14 @@ function CreateEvent() {
             {/* Vertical */}
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Users className="w-4 h-4 mr-2 text-indigo-500" />
+                <Users className="w-4 h-4 mr-2 text-accent" />
                 Vertical
               </label>
               <select
                 name="vertical"
                 value={event.vertical}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                className="w-full px-4 py-2 border border-accent rounded-lg  "
                 required>
                 <option value="">Select Vertical</option>
                 {options.map((option) => (
@@ -127,7 +127,7 @@ function CreateEvent() {
             {/* Event Date */}
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Calendar className="w-4 h-4 mr-2 text-indigo-500" />
+                <Calendar className="w-4 h-4 mr-2 text-accent" />
                 Event Date
               </label>
               <input
@@ -135,7 +135,7 @@ function CreateEvent() {
                 name="eventDate"
                 value={event.eventDate}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                className="w-full px-4 py-2 border border-accent rounded-lg  "
                 required
               />
             </div>
@@ -143,7 +143,7 @@ function CreateEvent() {
             {/* Event Time */}
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Clock className="w-4 h-4 mr-2 text-indigo-500" />
+                <Clock className="w-4 h-4 mr-2 text-accent" />
                 Event Time
               </label>
               <input
@@ -151,7 +151,7 @@ function CreateEvent() {
                 name="eventTime"
                 value={event.eventTime}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                className="w-full px-4 py-2 border border-accent rounded-lg  "
                 required
               />
             </div>
@@ -159,7 +159,7 @@ function CreateEvent() {
             {/* Registration Link */}
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Link className="w-4 h-4 mr-2 text-indigo-500" />
+                <Link className="w-4 h-4 mr-2 text-accent" />
                 Registration Link
               </label>
               <input
@@ -167,14 +167,14 @@ function CreateEvent() {
                 name="link"
                 value={event.link}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                className="w-full px-4 py-2 border border-accent rounded-lg  "
                 placeholder="Enter registration link"
                 required
               />
             </div>
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <MapPin className="w-4 h-4 mr-2 text-indigo-500" />
+                <MapPin className="w-4 h-4 mr-2 text-accent" />
                 Location
               </label>
               <input
@@ -182,14 +182,14 @@ function CreateEvent() {
                 name="location"
                 value={event.location}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                className="w-full px-4 py-2 border border-accent rounded-lg  "
                 placeholder="Enter event location"
                 required
               />
             </div>
             <div>
               <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Users className="w-4 h-4 mr-2 text-indigo-500" />
+                <Users className="w-4 h-4 mr-2 text-accent" />
                 Organized By
               </label>
               <input
@@ -197,7 +197,7 @@ function CreateEvent() {
                 name="organisedBy"
                 value={event.organisedBy}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition duration-200"
+                className="w-full px-4 py-2 border border-accent rounded-lg  "
                 placeholder="Enter organizer name"
                 required
               />
@@ -205,7 +205,7 @@ function CreateEvent() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200 flex items-center justify-center">
+              className="w-full bg-accent text-white py-2 px-4 rounded-lg hover:bg-slate-500 focus:outline-none  focus:ring-orange-500 focus:ring-offset-2 transition duration-200 flex items-center justify-center">
               <Clock className="w-4 h-4 mr-2" />
               Create Event
             </button>

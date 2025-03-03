@@ -12,16 +12,18 @@ const Navbar = () => {
     <nav className="sticky top-0 bg-white text-lg p-4 z-20 shadow-md">
       <div className="flex justify-between items-center  mx-auto">
         {/* Logo Section */}
-        <div className="flex items-center gap-4">
-          <Image
-            src={logo}
-            alt="logo"
-            width={50}
-            height={50}
-            className="rounded-full"
-          />
-          <p className="font-bold">CVR LDC</p>
-        </div>
+        <Link href="/">
+          <div className="flex items-center gap-4">
+            <Image
+              src={logo}
+              alt="logo"
+              width={50}
+              height={50}
+              className="rounded-full"
+            />
+            <p className="font-bold">CVR LDC</p>
+          </div>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
