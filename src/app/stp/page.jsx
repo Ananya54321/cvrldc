@@ -50,7 +50,7 @@ export default function STPPage() {
         <div
           className="absolute inset-0 opacity-10 hero-background"
           style={{
-            backgroundImage: `url(${"/writers-bg.jpeg"})`,
+            backgroundImage: `url(${"/stp-bg.jpeg"})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
