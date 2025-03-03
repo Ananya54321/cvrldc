@@ -4,6 +4,7 @@ import { addQuiz } from "@/../actions/quizActions";
 import { useRouter } from "next/navigation";
 import QuizDetailsForm from "@/components/pages/eclectics/QuizDetailsForm";
 import QuestionForm from "@/components/pages/eclectics/QuestionForm";
+import { redirect } from "next/navigation";
 
 const CreateQuizPage = () => {
   const router = useRouter();
@@ -197,6 +198,7 @@ const CreateQuizPage = () => {
       } else {
         setError(response.message || "Failed to create quiz");
         setStep(1);
+        redirect("/login");
       }
     } catch (err) {
       setError(err.message || "An error occurred");

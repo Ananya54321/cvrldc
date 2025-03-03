@@ -32,7 +32,7 @@ const Navbar = () => {
           <Link href="/verticals">Verticals</Link>
         </div>
         <Link
-          href="/join-us"
+          href="/login"
           className="bg-primary hidden md:flex text-white px-4 py-2 rounded-lg hover:bg-opacity-90">
           Join us
         </Link>

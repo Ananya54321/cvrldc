@@ -13,9 +13,9 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     const data = await loginUser(username, password);
-    
+
     if (data.success) {
       toast.success("User logged in successfully");
 
@@ -55,7 +55,7 @@ function Login() {
             className="border border-gray-300 p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             required
           />
-          
+
           <button
             type="submit"
             className={`py-3 rounded-lg text-white transition duration-300 ${
@@ -63,8 +63,7 @@ function Login() {
                 ? "bg-blue-400 cursor-not-allowed"
                 : "bg-blue-500 hover:bg-blue-600"
             }`}
-            disabled={isLoading}
-          >
+            disabled={isLoading}>
             {isLoading ? "Loading..." : "Login"}
           </button>
         </form>
