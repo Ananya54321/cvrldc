@@ -392,7 +392,8 @@ export const teamMembers = [
       "https://www.linkedin.com/in/akshara-priya-reddy-b63175293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
     Designation: "Writer's Space Vertical Lead",
     Category: "Writer's Space Vertical",
-    photo: "https://drive.google.com/open?id=1BhFyoZCb5N0C3MqcTcrLxGM5_9KiIVtM",
+    photo:
+      "https://drive.google.com/uc?export=view&id=1C5F2MxtReZQ0eH57ccxIIgYOTux5OUXZ",
   },
   {
     Name: "Vuppu Bhanu Teja Gupta",
