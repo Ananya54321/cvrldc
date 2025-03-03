@@ -92,9 +92,7 @@ export default function WritersSpacePage() {
                 variant="outline"
                 size="lg"
                 className="border-accent bg-primary text-accent hover:bg-accent/10 hover:text-accent">
-                <Link
-                  href="/writers-space/submit-work"
-                  className="flex items-center gap-2">
+                <Link href="/blog" className="flex items-center gap-2">
                   <PenTool size={20} />
                   Submit Work
                 </Link>
@@ -152,9 +150,7 @@ export default function WritersSpacePage() {
                     asChild
                     variant="primary"
                     className="border-white text-white bg-ternary hover:bg-white/30">
-                    <Link href="/writers-space/submit-work">
-                      Submit Your Work
-                    </Link>
+                    <Link href="/blog">Submit Your Work</Link>
                   </Button>
                 </div>
               </div>
