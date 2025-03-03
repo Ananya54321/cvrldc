@@ -86,18 +86,18 @@ const TeamPage = () => {
           }
 
           return (
-            <div key={category} className="mb-20">
+            <div key={category} className="mb-10 md:mb-20">
               <h2 className="text-3xl md:text-4xl titlefont text-primary mb-10 text-center">
                 {category}
               </h2>
 
-              <div className="grid grid-cols-1 md:mx-0 mx-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:mx-0 mx-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
                 {membersGroup[category].map((member, index) => (
                   <div
                     key={member.LDCID || index}
                     className="bg-primary rounded-lg shadow-lg overflow-hidden hover:translate-y-[-5px] transition-transform duration-300"
                     style={{ animationDelay: getMemberDelay(index) }}>
-                    <div className="relative h-72 w-full overflow-hidden bg-primary">
+                    <div className="relative h-64 md:h-72  w-full overflow-hidden bg-primary">
                       <Image
                         src={getImageUrl(member.photo)}
                         alt={member.Name || "Team Member"}
