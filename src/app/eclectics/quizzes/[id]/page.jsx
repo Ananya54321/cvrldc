@@ -13,23 +13,34 @@ const QuizPage = ({ params }) => {
   const [isCorrect, setIsCorrect] = useState(null);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [questionAnimation, setQuestionAnimation] = useState(true);
 
   useEffect(() => {
     const fetchQuiz = async () => {
-      const response = await getQuizById(id);
-      if (response.success) {
-        setQuiz(response.quiz);
-      } else {
-        console.error("Error fetching quiz:", response.message);
+      try {
+        const response = await getQuizById(id);
+        if (response.success) {
+          setQuiz(response.quiz);
+        } else {
+          console.error("Error fetching quiz:", response.message);
+        }
+      } catch (error) {
+        console.error("Failed to fetch quiz:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchQuiz();
   }, [id]);
 
-  if (!quiz) {
-    return <div>Loading...</div>;
-  }
+  // Animation effect when moving between questions
+  useEffect(() => {
+    setQuestionAnimation(true);
+    const timer = setTimeout(() => setQuestionAnimation(false), 500);
+    return () => clearTimeout(timer);
+  }, [currentQuestionIndex]);
 
   const handleAnswer = () => {
     if (selectedOption === null) return;
@@ -55,74 +66,254 @@ const QuizPage = ({ params }) => {
     }
   };
 
-  return (
-    <div className="max-w-lg mx-auto mt-10 p-5 border rounded-lg shadow-lg">
-      <h2 className="text-xl font-bold">{quiz.title}</h2>
-      <p className="mb-4 text-gray-600">{quiz.description}</p>
+  if (loading) {
+    return (
+      <div className="container mx-auto px-4 py-12 max-w-2xl fade-up">
+        <div className="bg-secondary/30 rounded-lg p-8 animate-pulse">
+          <div className="h-7 bg-accent/20 rounded w-3/4 mb-4"></div>
+          <div className="h-4 bg-accent/20 rounded w-full mb-8"></div>
+          <div className="h-6 bg-accent/20 rounded w-5/6 mb-4"></div>
+          <div className="space-y-4 my-6">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="h-12 bg-accent/10 rounded-md"></div>
+            ))}
+          </div>
+          <div className="h-10 bg-accent/20 rounded w-1/3 mt-6"></div>
+        </div>
+      </div>
+    );
+  }
 
-      {!showResult ? (
-        <>
-          <h3 className="text-lg font-semibold">
-            {quiz.questions[currentQuestionIndex].question}
-          </h3>
-          <div className="mt-4">
-            {quiz.questions[currentQuestionIndex].options.map(
-              (option, index) => (
-                <button
-                  key={index}
-                  className={`block w-full p-2 border rounded-md mb-2 ${
-                    selectedOption === index
-                      ? isCorrect === true
-                        ? "bg-green-400 text-white"
-                        : isCorrect === false
-                        ? "bg-red-400 text-white"
-                        : "bg-gray-200"
-                      : "bg-gray-100"
-                  }`}
-                  onClick={() => setSelectedOption(index)}>
-                  {option.option}
-                </button>
-              )
+  if (!quiz) {
+    return (
+      <div className="container mx-auto px-4 py-12 max-w-2xl text-center">
+        <h2 className="text-primary text-xl mb-4">Quiz not found</h2>
+        <button
+          className="px-6 py-2 bg-accent text-secondary rounded-lg hover:bg-accent/90 transition-colors"
+          onClick={() => router.push("/eclectics/quizzes")}>
+          Return to Quizzes
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-12 max-w-2xl fade-up">
+      {/* Quiz Card */}
+      <div className="bg-secondary/50 rounded-lg shadow-lg overflow-hidden border border-accent/20">
+        {/* Progress bar */}
+        <div className="w-full bg-secondary h-2">
+          <div
+            className="h-full bg-accent transition-all duration-500 ease-in-out"
+            style={{
+              width: !showResult
+                ? `${(currentQuestionIndex / quiz.questions.length) * 100}%`
+                : "100%",
+            }}></div>
+        </div>
+
+        <div className="p-8">
+          {/* Header */}
+          <div className="mb-8">
+            <h2 className="titlefont text-2xl md:text-3xl text-primary mb-2">
+              {quiz.title}
+            </h2>
+            <p className="text-ternary/80">{quiz.description}</p>
+
+            {!showResult && (
+              <div className="flex justify-between items-center mt-4 text-sm text-ternary/70">
+                <span>
+                  Question {currentQuestionIndex + 1} of {quiz.questions.length}
+                </span>
+                <span>Score: {score}</span>
+              </div>
             )}
           </div>
 
-          <button
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
-            onClick={handleAnswer}
-            disabled={selectedOption === null}>
-            Submit Answer
-          </button>
+          {/* Quiz Content */}
+          {!showResult ? (
+            <div
+              className={`${
+                questionAnimation
+                  ? "opacity-0 translate-y-4"
+                  : "opacity-100 translate-y-0"
+              } transition-all duration-500`}>
+              {/* Question */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-primary">
+                  {quiz.questions[currentQuestionIndex].question}
+                </h3>
+              </div>
 
-          {isCorrect !== null && (
-            <p
-              className={`mt-2 font-semibold ${
-                isCorrect ? "text-green-500" : "text-red-500"
-              }`}>
-              {isCorrect ? "Correct!" : "Wrong Answer!"}
-            </p>
-          )}
+              {/* Options */}
+              <div className="space-y-3 mb-8">
+                {quiz.questions[currentQuestionIndex].options.map(
+                  (option, index) => (
+                    <button
+                      key={index}
+                      className={`w-full text-left p-4 rounded-lg border transition-all custom-focus
+                      ${
+                        selectedOption === index
+                          ? isCorrect === true
+                            ? "bg-[#d4edda] border-[#c3e6cb] text-[#155724]"
+                            : isCorrect === false
+                            ? index === selectedOption
+                              ? "bg-[#f8d7da] border-[#f5c6cb] text-[#721c24]"
+                              : "bg-white border-accent/20"
+                            : "bg-primary/5 border-accent/20"
+                          : "bg-white hover:bg-primary/5 border-accent/10"
+                      }
+                      ${
+                        isCorrect !== null ? "cursor-default" : "cursor-pointer"
+                      }`}
+                      onClick={() =>
+                        isCorrect === null && setSelectedOption(index)
+                      }
+                      disabled={isCorrect !== null}>
+                      <div className="flex items-center">
+                        <span
+                          className={`flex items-center justify-center w-8 h-8 rounded-full mr-3 flex-shrink-0
+                        ${
+                          selectedOption === index
+                            ? isCorrect === true
+                              ? "bg-[#28a745] text-white"
+                              : isCorrect === false
+                              ? index === selectedOption
+                                ? "bg-[#dc3545] text-white"
+                                : "bg-accent/20 text-primary"
+                              : "bg-accent text-white"
+                            : "bg-accent/20 text-primary"
+                        }`}>
+                          {String.fromCharCode(65 + index)}
+                        </span>
+                        <span>{option.option}</span>
+                      </div>
+                    </button>
+                  )
+                )}
+              </div>
 
-          {isCorrect !== null && (
-            <button
-              className="mt-4 px-4 py-2 bg-gray-500 text-white rounded-lg"
-              onClick={handleNextQuestion}>
-              Next Question
-            </button>
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row justify-between gap-4">
+                <button
+                  className={`px-5 py-3 rounded-lg font-medium transition-all
+                    ${
+                      isCorrect !== null
+                        ? "bg-primary/10 text-primary/60 cursor-not-allowed"
+                        : "bg-primary text-secondary hover:bg-primary/90"
+                    }`}
+                  onClick={handleAnswer}
+                  disabled={selectedOption === null || isCorrect !== null}>
+                  Submit Answer
+                </button>
+
+                {isCorrect !== null && (
+                  <button
+                    className="px-5 py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-colors"
+                    onClick={handleNextQuestion}>
+                    {currentQuestionIndex + 1 < quiz.questions.length
+                      ? "Next Question"
+                      : "See Results"}
+                  </button>
+                )}
+              </div>
+
+              {/* Feedback Message */}
+              {isCorrect !== null && (
+                <div
+                  className={`mt-6 p-4 rounded-lg text-center
+                  ${
+                    isCorrect
+                      ? "bg-[#d4edda]/30 border border-[#c3e6cb] text-[#155724]"
+                      : "bg-[#f8d7da]/30 border border-[#f5c6cb] text-[#721c24]"
+                  }`}>
+                  <p className="font-semibold">
+                    {isCorrect ? "Correct! 🎉" : "Wrong answer! 😕"}
+                  </p>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* Quiz Results */
+            <div className="text-center py-8">
+              <div className="inline-block p-4 rounded-full bg-accent/20 mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-16 h-16 text-accent"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </div>
+
+              <h2 className="titlefont text-3xl text-primary mb-2">
+                Quiz Completed!
+              </h2>
+
+              <div className="my-8">
+                <div className="text-5xl font-bold text-accent mb-2">
+                  {score} / {quiz.questions.length}
+                </div>
+                <p className="text-ternary">
+                  {score === quiz.questions.length
+                    ? "Perfect score! You're amazing!"
+                    : score >= quiz.questions.length * 0.7
+                    ? "Great job! You did well!"
+                    : "Good effort! Keep learning!"}
+                </p>
+              </div>
+
+              <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
+                <button
+                  className="px-6 py-3 bg-primary text-secondary rounded-lg hover:bg-primary/90 transition-colors"
+                  onClick={() => {
+                    setCurrentQuestionIndex(0);
+                    setSelectedOption(null);
+                    setIsCorrect(null);
+                    setScore(0);
+                    setShowResult(false);
+                  }}>
+                  Try Again
+                </button>
+                <button
+                  className="px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors"
+                  onClick={() => router.push("/eclectics/quizzes")}>
+                  Back to Quizzes
+                </button>
+              </div>
+
+              {/* Score analysis */}
+              <div className="mt-8 p-4 bg-secondary/70 rounded-lg">
+                <h3 className="text-primary font-medium mb-2">
+                  Performance Summary
+                </h3>
+                <div className="w-full bg-secondary/70 rounded-full h-4 mb-2">
+                  <div
+                    className="bg-accent h-4 rounded-full transition-all duration-1000 ease-out"
+                    style={{
+                      width: `${(score / quiz.questions.length) * 100}%`,
+                    }}></div>
+                </div>
+                <div className="text-sm text-ternary">
+                  You scored {Math.round((score / quiz.questions.length) * 100)}
+                  %
+                </div>
+              </div>
+            </div>
           )}
-        </>
-      ) : (
-        <div className="text-center">
-          <h2 className="text-2xl font-bold">Quiz Completed!</h2>
-          <p className="text-lg">
-            Your Score: {score} / {quiz.questions.length}
-          </p>
-          <button
-            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
-            onClick={() => router.push("/eclectics/quizzes")}>
-            Go Back to Quizzes
-          </button>
         </div>
-      )}
+      </div>
+
+      {/* Footer */}
+      <div className="text-center mt-6 text-sm text-ternary/60">
+        <p>© Eclectics Quiz {new Date().getFullYear()}</p>
+      </div>
     </div>
   );
 };

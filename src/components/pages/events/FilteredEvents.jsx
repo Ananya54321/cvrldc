@@ -40,7 +40,7 @@ function FilteredEvents({ vertical }) {
     <div className="bg-secondary text-primary py-16 px-8" id="events">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-5xl titlefont mb-16 text-center">
-          {vertical ? `${vertical} Events` : "Filtered Events"}
+          {vertical ? `Our Latest Events` : "Filtered Events"}
         </h2>
 
         <div className="flex flex-col gap-8 items-center">
