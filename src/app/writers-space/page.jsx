@@ -32,7 +32,7 @@ export default function WritersSpacePage() {
 
         if (heroBackground) {
           heroBackground.style.transform = `translateY(${scrollY * 0.4}px)`;
-          heroBackground.style.opacity = `${1 - scrollY * 0.002}`;
+          heroBackground.style.opacity = `${0.1 - scrollY * 0.002}`;
         }
       }
     };
@@ -47,9 +47,14 @@ export default function WritersSpacePage() {
       <section
         ref={heroRef}
         className="relative overflow-hidden bg-primary text-secondary py-20 md:py-32">
-        <div className="absolute inset-0 opacity-20 hero-background">
-          <div className="absolute inset-0 bg-[url('/placeholder.svg?height=1200&width=1800')] bg-cover bg-center" />
-        </div>
+        <div
+          className="absolute inset-0 opacity-10 hero-background"
+          style={{
+            backgroundImage: `url(${"/writers-bg.jpeg"})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             className="max-w-3xl mx-auto text-center"
@@ -176,29 +181,6 @@ export default function WritersSpacePage() {
                 </div>
               </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Admin Section */}
-      <section className="py-16 bg-secondary">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="bg-primary p-8 md:p-12 rounded-xl shadow-xl"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, margin: "-100px" }}>
-            <Badge className="mb-4 bg-accent/20 text-accent hover:bg-accent/30">
-              Administration
-            </Badge>
-            <h2 className="titlefont text-4xl mb-4 text-accent">
-              Manage Events
-            </h2>
-            <p className="mb-8 text-secondary">
-              For administrators: Add, edit, or remove Writer's Space events.
-            </p>
-            <EditEvents vertical={vertical} />
           </motion.div>
         </div>
       </section>

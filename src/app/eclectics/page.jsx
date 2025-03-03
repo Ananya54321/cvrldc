@@ -31,7 +31,7 @@ export default function EclecticsPage() {
 
         if (heroBackground) {
           heroBackground.style.transform = `translateY(${scrollY * 0.4}px)`;
-          heroBackground.style.opacity = `${1 - scrollY * 0.002}`;
+          heroBackground.style.opacity = `${0.1 - scrollY * 0.002}`;
         }
       }
     };
@@ -46,9 +46,14 @@ export default function EclecticsPage() {
       <section
         ref={heroRef}
         className="relative overflow-hidden bg-primary text-secondary py-20 md:py-32">
-        <div className="absolute inset-0 opacity-20 hero-background">
-          <div className="absolute inset-0 bg-[url('/placeholder.svg?height=1200&width=1800')] bg-cover bg-center" />
-        </div>
+        <div
+          className="absolute inset-0 opacity-10 hero-background"
+          style={{
+            backgroundImage: `url(${"/eclectics-bg.jpeg"})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             className="max-w-3xl mx-auto text-center"
