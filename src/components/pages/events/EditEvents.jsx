@@ -49,18 +49,18 @@ function EditEvents({ vertical }) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+    <div className="min-h-screen  rounded-lg py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md mx-auto bg-ternary rounded-xl shadow-lg overflow-hidden">
         <div className="px-8 py-6">
-          <h2 className="text-2xl font-bold text-gray-900 text-center mb-6">
+          <h2 className="text-2xl font-bold text-accent text-center mb-6">
             Create New Event
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Event Title */}
             <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Type className="w-4 h-4 mr-2 text-indigo-500" />
+              <label className="flex items-center text-sm font-medium text-secondary mb-2">
+                <Type className="w-4 h-4 mr-2 text-accent" />
                 Event Title (Enter the same title as that during creation)
               </label>
               <input
@@ -76,8 +76,8 @@ function EditEvents({ vertical }) {
 
             {/* Event Description */}
             <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <FileText className="w-4 h-4 mr-2 text-indigo-500" />
+              <label className="flex items-center text-sm font-medium text-secondary mb-2">
+                <FileText className="w-4 h-4 mr-2 text-accent" />
                 Description
               </label>
               <textarea
@@ -93,8 +93,8 @@ function EditEvents({ vertical }) {
 
             {/* Event Date */}
             <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Calendar className="w-4 h-4 mr-2 text-indigo-500" />
+              <label className="flex items-center text-sm font-medium text-secondary mb-2">
+                <Calendar className="w-4 h-4 mr-2 text-accent" />
                 Event Date
               </label>
               <input
@@ -109,8 +109,8 @@ function EditEvents({ vertical }) {
 
             {/* Event Time */}
             <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Clock className="w-4 h-4 mr-2 text-indigo-500" />
+              <label className="flex items-center text-sm font-medium text-secondary mb-2">
+                <Clock className="w-4 h-4 mr-2 text-accent" />
                 Event Time
               </label>
               <input
@@ -125,8 +125,8 @@ function EditEvents({ vertical }) {
 
             {/* Registration Link */}
             <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Link className="w-4 h-4 mr-2 text-indigo-500" />
+              <label className="flex items-center text-sm font-medium text-secondary mb-2">
+                <Link className="w-4 h-4 mr-2 text-accent" />
                 Registration Link
               </label>
               <input
@@ -140,8 +140,8 @@ function EditEvents({ vertical }) {
               />
             </div>
             <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <MapPin className="w-4 h-4 mr-2 text-indigo-500" />
+              <label className="flex items-center text-sm font-medium text-secondary mb-2">
+                <MapPin className="w-4 h-4 mr-2 text-accent" />
                 Location
               </label>
               <input
@@ -155,8 +155,8 @@ function EditEvents({ vertical }) {
               />
             </div>
             <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Users className="w-4 h-4 mr-2 text-indigo-500" />
+              <label className="flex items-center text-sm font-medium text-secondary mb-2">
+                <Users className="w-4 h-4 mr-2 text-accent" />
                 Organized By
               </label>
               <input
@@ -172,7 +172,7 @@ function EditEvents({ vertical }) {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200 flex items-center justify-center">
+              className="w-full  text-white py-2 px-4 rounded-lg bg-accent focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200 flex items-center justify-center">
               <Clock className="w-4 h-4 mr-2" />
               Confirm Changes
             </button>

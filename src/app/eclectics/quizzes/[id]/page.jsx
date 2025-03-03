@@ -100,9 +100,9 @@ const QuizPage = ({ params }) => {
   return (
     <div className="container mx-auto px-4 py-12 max-w-2xl fade-up">
       {/* Quiz Card */}
-      <div className="bg-secondary/50 rounded-lg shadow-lg overflow-hidden border border-accent/20">
+      <div className="bg-secondary rounded-lg shadow-lg overflow-hidden border border-accent">
         {/* Progress bar */}
-        <div className="w-full bg-secondary h-2">
+        <div className="w-full bg-accent h-2">
           <div
             className="h-full bg-accent transition-all duration-500 ease-in-out"
             style={{
@@ -121,7 +121,7 @@ const QuizPage = ({ params }) => {
             <p className="text-ternary/80">{quiz.description}</p>
 
             {!showResult && (
-              <div className="flex justify-between items-center mt-4 text-sm text-ternary/70">
+              <div className="flex justify-between items-center mt-2 text-sm text-ternary/70">
                 <span>
                   Question {currentQuestionIndex + 1} of {quiz.questions.length}
                 </span>
@@ -161,7 +161,7 @@ const QuizPage = ({ params }) => {
                               ? "bg-[#f8d7da] border-[#f5c6cb] text-[#721c24]"
                               : "bg-white border-accent/20"
                             : "bg-primary/5 border-accent/20"
-                          : "bg-white hover:bg-primary/5 border-accent/10"
+                          : "bg-white hover:bg-accent border-accent/10"
                       }
                       ${
                         isCorrect !== null ? "cursor-default" : "cursor-pointer"
@@ -224,8 +224,8 @@ const QuizPage = ({ params }) => {
                   className={`mt-6 p-4 rounded-lg text-center
                   ${
                     isCorrect
-                      ? "bg-[#d4edda]/30 border border-[#c3e6cb] text-[#155724]"
-                      : "bg-[#f8d7da]/30 border border-[#f5c6cb] text-[#721c24]"
+                      ? "bg-[#d4edda]/50 border border-[#35bd55] text-[#155724]"
+                      : "bg-[#f8d7da]/50 border border-[#c83a48] text-[#721c24]"
                   }`}>
                   <p className="font-semibold">
                     {isCorrect ? "Correct! 🎉" : "Wrong answer! 😕"}
@@ -282,7 +282,7 @@ const QuizPage = ({ params }) => {
                   Try Again
                 </button>
                 <button
-                  className="px-6 py-3 bg-accent text-white rounded-lg hover:bg-accent/90 transition-colors"
+                  className="px-6 py-3 bg-accent text-white rounded-lg hover:bg-slate-500 transition-colors"
                   onClick={() => router.push("/eclectics/quizzes")}>
                   Back to Quizzes
                 </button>
@@ -308,11 +308,6 @@ const QuizPage = ({ params }) => {
             </div>
           )}
         </div>
-      </div>
-
-      {/* Footer */}
-      <div className="text-center mt-6 text-sm text-ternary/60">
-        <p>© Eclectics Quiz {new Date().getFullYear()}</p>
       </div>
     </div>
   );

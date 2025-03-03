@@ -26,18 +26,17 @@ const QuizzesPage = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-6xl fade-up">
+    <div className="container mx-auto w-screen   px-4 py-12  fade-up">
       {/* Header Section */}
       <div className="text-center mb-12">
-        <h1 className="titlefont text-4xl md:text-5xl text-primary mb-3">
+        <h1 className="titlefont text-4xl md:text-5xl text-secondary mb-3">
           Explore Our{" "}
           <span className="text-highlight text-accent">Quizzes</span>
         </h1>
-        <p className="text-ternary max-w-2xl mx-auto">
+        <p className="text-secondary max-w-2xl mx-auto">
           Test your knowledge and challenge yourself with our collection of
           interactive quizzes.
         </p>
-        <div className="wave-divider my-8"></div>
       </div>
 
       {/* Quizzes List */}

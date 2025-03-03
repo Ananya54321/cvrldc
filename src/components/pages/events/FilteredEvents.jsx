@@ -37,7 +37,9 @@ function FilteredEvents({ vertical }) {
   }
 
   return (
-    <div className="bg-secondary text-primary py-16 px-8" id="events">
+    <div
+      className="bg-secondary rounded-3xl text-primary py-16 px-8"
+      id="events">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-5xl titlefont mb-16 text-center">
           {vertical ? `Our Latest Events` : "Filtered Events"}
