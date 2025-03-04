@@ -91,7 +91,7 @@ const TeamPage = () => {
               <div
                 className={`grid ${
                   membersGroup[category].length === 1
-                    ? "grid-cols-1 place-items-center"
+                    ? "mx-auto w-[50%] "
                     : "grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
                 } gap-2 md:gap-8`}>
                 {membersGroup[category].map((member, index) => (
