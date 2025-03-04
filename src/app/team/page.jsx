@@ -91,13 +91,18 @@ const TeamPage = () => {
                 {category}
               </h2>
 
-              <div className="grid grid-cols-1 md:mx-0 mx-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
+              <div
+                className={`grid ${
+                  membersGroup[category].length === 1
+                    ? "grid-cols-1 place-items-center"
+                    : "grid-cols-1 md:mx-0 mx-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                } gap-4 md:gap-8`}>
                 {membersGroup[category].map((member, index) => (
                   <div
                     key={member.LDCID || index}
-                    className="bg-primary rounded-lg shadow-lg overflow-hidden hover:translate-y-[-5px] transition-transform duration-300"
+                    className="bg-primary rounded-lg shadow-lg overflow-hidden hover:translate-y-[-5px] transition-transform duration-300 w-full max-w-sm"
                     style={{ animationDelay: getMemberDelay(index) }}>
-                    <div className="relative h-64 md:h-72  w-full overflow-hidden bg-primary">
+                    <div className="relative h-64 md:h-72 w-full overflow-hidden bg-primary">
                       <Image
                         src={getImageUrl(member.photo)}
                         alt={member.Name || "Team Member"}
