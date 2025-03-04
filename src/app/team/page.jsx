@@ -95,14 +95,14 @@ const TeamPage = () => {
                 className={`grid ${
                   membersGroup[category].length === 1
                     ? "grid-cols-1 place-items-center"
-                    : "grid-cols-1 md:mx-0 mx-9 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                    : "grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
                 } gap-4 md:gap-8`}>
                 {membersGroup[category].map((member, index) => (
                   <div
                     key={member.LDCID || index}
                     className="bg-primary rounded-lg shadow-lg overflow-hidden hover:translate-y-[-5px] transition-transform duration-300 w-full max-w-sm"
                     style={{ animationDelay: getMemberDelay(index) }}>
-                    <div className="relative h-64 md:h-72 w-full overflow-hidden bg-primary">
+                    <div className="relative h-48 md:h-72 w-full overflow-hidden bg-primary">
                       <Image
                         src={getImageUrl(member.photo)}
                         alt={member.Name || "Team Member"}
@@ -115,17 +115,17 @@ const TeamPage = () => {
                     </div>
 
                     <div className="p-6">
-                      <h3 className="text-xl font-semibold text-accent mb-1">
+                      <h3 className="text-base md:text-xl font-semibold text-accent mb-1">
                         {member.Name || "Team Member"}
                       </h3>
-                      <p className="text-sm text-secondary font-medium mb-2">
+                      <p className="text-xs md:text-sm text-secondary font-medium mb-2">
                         {member.Designation}
                       </p>
-                      <p className="text-xs text-secondary mb-4">
+                      <p className="text-xs text-accent mb-4">
                         {member.LDCID || ""}
                       </p>
 
-                      <div className="flex space-x-4 mt-4">
+                      <div className="flex space-x-4 md:mt-4">
                         {member.Instagram && (
                           <Link
                             href={member.Instagram}
