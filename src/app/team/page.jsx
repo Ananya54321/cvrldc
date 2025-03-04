@@ -61,7 +61,7 @@ const TeamPage = () => {
   const membersGroup = groupMembersByCategory();
 
   return (
-    <div className="min-h-screen bg-secondary py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-secondary py-16 px-2 sm:px-4 lg:px-8">
       {/* Hero section */}
       <div className="text-center mb-16 animate-fade-up">
         <h1 className="text-5xl md:text-7xl font-bold titlefont text-primary mb-6">
@@ -73,9 +73,6 @@ const TeamPage = () => {
           collective mission.
         </p>
       </div>
-
-      {/* Wave divider */}
-      <div className="mb-16"></div>
 
       {/* Team members by designation */}
       <div className="max-w-7xl mx-auto">
@@ -96,7 +93,7 @@ const TeamPage = () => {
                   membersGroup[category].length === 1
                     ? "grid-cols-1 place-items-center"
                     : "grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-                } gap-4 md:gap-8`}>
+                } gap-2 md:gap-8`}>
                 {membersGroup[category].map((member, index) => (
                   <div
                     key={member.LDCID || index}
@@ -109,7 +106,7 @@ const TeamPage = () => {
                         fill
                         className="object-cover transition-transform duration-300 hover:scale-105"
                         onError={(e) => {
-                          e.target.src = "/default-profile.jpg";
+                          e.target.src = "/cvrldclogo.svg";
                         }}
                       />
                     </div>
