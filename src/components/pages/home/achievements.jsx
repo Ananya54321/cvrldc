@@ -34,29 +34,6 @@ const Achievements = () => {
             </div>
           ))}
         </div>
-
-        <div className="mt-16 bg-primary/30 p-8 rounded-xl">
-          <h3 className="text-3xl text-center mb-8 text-accent">
-            What Our Members Say
-          </h3>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="text-center">
-                {/* <div className="w-20 h-20 mx-auto rounded-full overflow-hidden mb-4 border-2 border-accent">
-                      </div> */}
-                <div className="flex justify-center items-center">
-                  <CircleUserRound size={64} />
-                </div>
-                <p className="italic text-white/90 mb-4">
-                  "{testimonial.text}"
-                </p>
-                <p className="font-bold text-accent">{testimonial.name}</p>
-                <p className="text-white/70 text-sm">{testimonial.role}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );
