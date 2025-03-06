@@ -83,7 +83,7 @@ const TeamPage = () => {
           }
 
           return (
-            <div key={category} className="mb-10 md:mb-20">
+            <div key={category} className="mb-10 w-full md:mb-20">
               <h2 className="text-3xl md:text-4xl titlefont text-primary mb-10 text-center">
                 {category}
               </h2>
@@ -91,7 +91,7 @@ const TeamPage = () => {
               <div
                 className={`grid ${
                   membersGroup[category].length === 1
-                    ? "mx-auto w-[50%] "
+                    ? "mx-auto w-[50%] md:w-[30%]"
                     : "grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
                 } gap-2 md:gap-8`}>
                 {membersGroup[category].map((member, index) => (
