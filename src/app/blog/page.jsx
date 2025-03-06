@@ -9,6 +9,7 @@ import {
 } from "../../../actions/blogActions";
 import { toast } from "sonner";
 import Link from "next/link";
+import UploadPage from "@/components/pages/blog/UploadPage";
 const page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [title, setTitle] = useState("");
@@ -227,6 +228,7 @@ const page = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="p-6 space-y-6">
+              <UploadPage/>
               <div className="space-y-2">
                 <label
                   htmlFor="title"
