@@ -85,3 +85,16 @@ export async function updateBlog(id, title, content, token) {
     return { success: false, message: err.message };
   }
 }
+
+export async function viewBlog(id) {
+  try {
+    await connectDB();
+    const blog = await Blog.findById(id).populate("createdBy");
+    if (!blog) {
+      return { success: false, message: "Blog not found" };
+    }
+    return { success: true, blog: JSON.parse(JSON.stringify(blog)) };
+  } catch (err) {
+    return { success: false, message: err.message };
+  }
+}

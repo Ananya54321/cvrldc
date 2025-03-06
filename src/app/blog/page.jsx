@@ -8,6 +8,7 @@ import {
   updateBlog,
 } from "../../../actions/blogActions";
 import { toast } from "sonner";
+import Link from "next/link";
 const page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [title, setTitle] = useState("");
@@ -173,15 +174,10 @@ const page = () => {
                   {/* Action Buttons */}
                   <div className="flex items-center justify-between mt-6">
                     <div className="flex space-x-4">
-                      <button
-                        onClick={() =>
-                          setExpandedBlog(
-                            expandedBlog === blog._id ? null : blog._id
-                          )
-                        }
+                      <Link href={`/blog/${blog._id}`}
                         className="bg-[#BF8B41] hover:bg-[#464936] text-[#ECDEBC] font-semibold py-2 px-4 rounded-lg transition duration-300">
-                        {expandedBlog === blog._id ? "Show Less" : "Read More"}
-                      </button>
+                        Read more
+                      </Link>
 
                       {blog.createdBy &&
                         user &&
