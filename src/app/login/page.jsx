@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { User, Lock } from "lucide-react";
 import { loginUser } from "../../../actions/userActions";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -22,7 +23,7 @@ function Login() {
           localStorage.setItem("token", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
         }
-        // router.push('/');
+        redirect("/");
       } else {
         toast.error(data.message || "Login failed");
       }
@@ -44,7 +45,7 @@ function Login() {
             Sign in to continue to LDC Community
           </p>
         </div>
-        <div className="bg-[#2c1810] mx-auto w-[50%] rounded-2xl shadow-2xl p-8">
+        <div className="bg-[#2c1810] mx-auto md:w-[50%] rounded-2xl shadow-2xl p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <label className="text-accent text-sm font-medium">
