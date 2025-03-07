@@ -112,13 +112,13 @@ const QuizPage = ({ params }) => {
             }}></div>
         </div>
 
-        <div className="p-8">
+        <div className="p-4 md:p-8">
           {/* Header */}
-          <div className="mb-8">
+          <div className="mb-4 md:mb-8">
             <h2 className="titlefont text-2xl md:text-3xl text-primary mb-2">
               {quiz.title}
             </h2>
-            <p className="text-ternary/80">{quiz.description}</p>
+            {/* <p className="text-ternary/80">{quiz.description}</p> */}
 
             {!showResult && (
               <div className="flex justify-between items-center mt-2 text-sm text-ternary/70">
@@ -146,12 +146,12 @@ const QuizPage = ({ params }) => {
               </div>
 
               {/* Options */}
-              <div className="space-y-3 mb-8">
+              <div className="space-y-2 md:space-y-3 mb-3 md:mb-8">
                 {quiz.questions[currentQuestionIndex].options.map(
                   (option, index) => (
                     <button
                       key={index}
-                      className={`w-full text-left p-4 rounded-lg border transition-all custom-focus
+                      className={`w-full text-left p-2 md:p-4 rounded-lg border transition-all custom-focus
                       ${
                         selectedOption === index
                           ? isCorrect === true
@@ -217,29 +217,14 @@ const QuizPage = ({ params }) => {
                   </button>
                 )}
               </div>
-
-              {/* Feedback Message */}
-              {isCorrect !== null && (
-                <div
-                  className={`mt-6 p-4 rounded-lg text-center
-                  ${
-                    isCorrect
-                      ? "bg-[#d4edda]/50 border border-[#35bd55] text-[#155724]"
-                      : "bg-[#f8d7da]/50 border border-[#c83a48] text-[#721c24]"
-                  }`}>
-                  <p className="font-semibold">
-                    {isCorrect ? "Correct! 🎉" : "Wrong answer! 😕"}
-                  </p>
-                </div>
-              )}
             </div>
           ) : (
             /* Quiz Results */
-            <div className="text-center py-8">
-              <div className="inline-block p-4 rounded-full bg-accent/20 mb-4">
+            <div className="text-center ">
+              <div className="inline-block p-4 rounded-full bg-accent/20 md:mb-4">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-16 h-16 text-accent"
+                  className="w-8 h-8 md:w-12 md:h-12 text-accent"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor">
@@ -252,12 +237,12 @@ const QuizPage = ({ params }) => {
                 </svg>
               </div>
 
-              <h2 className="titlefont text-3xl text-primary mb-2">
+              <h2 className="titlefont text-2xl md:text-3xl text-primary mb-2">
                 Quiz Completed!
               </h2>
 
-              <div className="my-8">
-                <div className="text-5xl font-bold text-accent mb-2">
+              <div className="md:my-8">
+                <div className="titlefont text-2xl md:text-3xl font-bold text-accent mb-2">
                   {score} / {quiz.questions.length}
                 </div>
                 <p className="text-ternary">
@@ -271,7 +256,7 @@ const QuizPage = ({ params }) => {
 
               <div className="mt-8 flex flex-col sm:flex-row justify-center gap-4">
                 <button
-                  className="px-6 py-3 bg-primary text-secondary rounded-lg hover:bg-primary/90 transition-colors"
+                  className="px-6 py-3 bg-primary text-secondary rounded-lg hover:scale-105 transition-transform"
                   onClick={() => {
                     setCurrentQuestionIndex(0);
                     setSelectedOption(null);
@@ -282,14 +267,14 @@ const QuizPage = ({ params }) => {
                   Try Again
                 </button>
                 <button
-                  className="px-6 py-3 bg-accent text-white rounded-lg hover:bg-slate-500 transition-colors"
+                  className="px-6 py-3 bg-accent text-white rounded-lg hover:scale-105 transition-transform"
                   onClick={() => router.push("/eclectics/quizzes")}>
                   Back to Quizzes
                 </button>
               </div>
 
               {/* Score analysis */}
-              <div className="mt-8 p-4 bg-secondary/70 rounded-lg">
+              <div className="mt-4 md:mt-8 p-4 bg-secondary rounded-lg">
                 <h3 className="text-primary font-medium mb-2">
                   Performance Summary
                 </h3>

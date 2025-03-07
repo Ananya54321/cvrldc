@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import QuizDetailsForm from "@/components/pages/eclectics/QuizDetailsForm";
 import QuestionForm from "@/components/pages/eclectics/QuestionForm";
 import { redirect } from "next/navigation";
+import { toast } from "sonner";
 
 const CreateQuizPage = () => {
   const router = useRouter();
@@ -27,7 +28,6 @@ const CreateQuizPage = () => {
     ],
   });
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   // Handle input changes for quiz details
@@ -75,16 +75,15 @@ const CreateQuizPage = () => {
     e.preventDefault();
 
     if (!quizData.title || !quizData.description) {
-      setError("Please fill all required fields");
+      toast.error("Please fill all required fields");
       return;
     }
 
     if (quizData.numQuestions < 1) {
-      setError("Number of questions must be at least 1");
+      toast.error("Number of questions must be at least 1");
       return;
     }
 
-    setError("");
     setStep(2);
 
     // Initialize questions array with the specified number of empty questions
@@ -108,21 +107,20 @@ const CreateQuizPage = () => {
   const saveCurrentQuestion = () => {
     // Validate current question
     if (!currentQuestion.question) {
-      setError("Question text is required");
+      toast.error("Please fill the question");
       return;
     }
 
     if (currentQuestion.options.some((opt) => !opt.option)) {
-      setError("All options must be filled");
+      toast.error("All options must be filled");
       return;
     }
 
     if (!currentQuestion.options.some((opt) => opt.isCorrect)) {
-      setError("Please select a correct answer");
+      toast.error("Please select a correct answer");
+
       return;
     }
-
-    setError("");
 
     // Update questions array
     const updatedQuestions = [...quizData.questions];
@@ -172,7 +170,6 @@ const CreateQuizPage = () => {
       // Go to previous question
       setQuestionIndex(questionIndex - 1);
       setCurrentQuestion(updatedQuestions[questionIndex - 1]);
-      setError("");
     }
   };
 
@@ -196,30 +193,31 @@ const CreateQuizPage = () => {
       if (response.success) {
         router.push("/eclectics/quizzes");
       } else {
-        setError(response.message || "Failed to create quiz");
+        toast.error(response.message || "Failed to create quiz");
+        console.log(response.message);
         setStep(1);
         redirect("/login");
       }
     } catch (err) {
-      setError(err.message || "An error occurred");
+      toast.error("An error occurred");
+      console.error(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className=" bg-primary min-h-screen p-6 fade-up">
-      <h1 className="text-5xl mb-8 titlefont text-accent text-center">
+    <div className=" bg-primary min-h-screen p-4 md:p-6 fade-up">
+      <h1 className="text-3xl md:text-5xl mb-3 md:mb-8 titlefont text-accent text-center">
         Create New Quiz
       </h1>
 
-      <div className="bg-secondary max-w-4xl mx-auto h-full rounded-lg p-8 shadow-lg ">
+      <div className="bg-secondary max-w-4xl mx-auto h-full rounded-lg p-4 md:p-8 shadow-lg ">
         {step === 1 ? (
           <QuizDetailsForm
             quizData={quizData}
             handleQuizDataChange={handleQuizDataChange}
             proceedToQuestions={proceedToQuestions}
-            error={error}
           />
         ) : (
           <QuestionForm
@@ -231,7 +229,6 @@ const CreateQuizPage = () => {
             quizData={quizData}
             goToPreviousQuestion={goToPreviousQuestion}
             saveCurrentQuestion={saveCurrentQuestion}
-            error={error}
             loading={loading}
           />
         )}

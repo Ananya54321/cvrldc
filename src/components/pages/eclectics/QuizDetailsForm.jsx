@@ -5,18 +5,13 @@ const QuizDetailsForm = ({
   quizData,
   handleQuizDataChange,
   proceedToQuestions,
-  error,
 }) => {
   return (
-    <form onSubmit={proceedToQuestions} className="space-y-8">
-      {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4 animate-pulse">
-          {error}
-        </div>
-      )}
-
-      <div className="mb-6">
-        <label className="block text-lg font-medium mb-2 text-primary">
+    <form
+      onSubmit={proceedToQuestions}
+      className="md:space-y-2 text-sm md:text-base">
+      <div className="md:mb-6 mb-2">
+        <label className="block text-base md:text-lg  font-medium mb-1 md:mb-2 text-primary">
           <span className="text-highlight">Quiz Topic/Title</span>{" "}
           <span className="text-accent">*</span>
         </label>
@@ -25,14 +20,14 @@ const QuizDetailsForm = ({
           name="title"
           value={quizData.title}
           onChange={handleQuizDataChange}
-          className="w-full p-3 border-2 border-accent/30 rounded-lg focus:border-accent custom-focus bg-white/80 text-primary transition-all duration-300"
+          className="w-full p-2 md:p-3 border-2 border-accent/30 rounded-lg focus:border-accent custom-focus bg-white/80 text-primary transition-all duration-300"
           placeholder="Enter an engaging quiz title"
           required
         />
       </div>
 
-      <div className="mb-6">
-        <label className="block text-lg font-medium mb-2 text-primary">
+      <div className="md:mb-6 mb-2">
+        <label className="block text-base md:text-lg  font-medium md:mb-2 text-primary">
           <span className="text-highlight">Description</span>{" "}
           <span className="text-accent">*</span>
         </label>
@@ -40,16 +35,16 @@ const QuizDetailsForm = ({
           name="description"
           value={quizData.description}
           onChange={handleQuizDataChange}
-          className="w-full p-3 border-2 border-accent/30 rounded-lg focus:border-accent custom-focus bg-white/80 text-primary transition-all duration-300"
+          className="w-full p-2 md:p-3 border-2 border-accent/30 rounded-lg focus:border-accent custom-focus bg-white/80 text-primary transition-all duration-300"
           rows="4"
           placeholder="Provide a brief description of your quiz"
           required
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-6 md:mb-6 mb-2">
         <div>
-          <label className="block text-lg font-medium mb-2 text-primary">
+          <label className="block text-base md:text-lg  font-medium mb-1 md:mb-2 text-primary">
             <span className="text-highlight">Number of Questions</span>{" "}
             <span className="text-accent">*</span>
           </label>
@@ -61,7 +56,7 @@ const QuizDetailsForm = ({
               onChange={handleQuizDataChange}
               min="1"
               max="50"
-              className="w-full p-3 pl-12 border-2 border-accent/30 rounded-lg focus:border-accent custom-focus bg-white/80 text-primary transition-all duration-300"
+              className="w-full p-2 pl-12 md:pl-12 md:p-3  border-2 border-accent/30 rounded-lg focus:border-accent custom-focus bg-white/80 text-primary transition-all duration-300"
               required
             />
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent">
@@ -80,13 +75,13 @@ const QuizDetailsForm = ({
               </svg>
             </span>
           </div>
-          <p className="mt-1 text-sm text-ternary/70 italic">
+          <p className="mb-3 mt-1 text-xs md:text-sm text-ternary/70 italic">
             Recommended: 5-20 questions
           </p>
         </div>
 
         <div>
-          <label className="block text-lg font-medium mb-2 text-primary">
+          <label className="block text-base md:text-lg  font-medium mb-1 md:mb-2 text-primary">
             <span className="text-highlight">Time Limit (minutes)</span>{" "}
             <span className="text-accent">*</span>
           </label>
@@ -97,7 +92,7 @@ const QuizDetailsForm = ({
               value={quizData.timeLimit}
               onChange={handleQuizDataChange}
               min="1"
-              className="w-full p-3 pl-12 border-2 border-accent/30 rounded-lg focus:border-accent custom-focus bg-white/80 text-primary transition-all duration-300"
+              className="w-full p-2 md:p-3 pl-12  md:pl-12 border-2 border-accent/30 rounded-lg focus:border-accent custom-focus bg-white/80 text-primary transition-all duration-300"
               required
             />
             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent">
@@ -116,7 +111,7 @@ const QuizDetailsForm = ({
               </svg>
             </span>
           </div>
-          <p className="mt-1 text-sm text-ternary/70 italic">
+          <p className="mt-1 text-xs md:text-sm text-ternary/70 italic">
             Recommended: 1-2 minutes per question
           </p>
         </div>

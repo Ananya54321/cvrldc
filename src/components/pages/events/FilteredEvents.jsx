@@ -38,11 +38,11 @@ function FilteredEvents({ vertical }) {
 
   return (
     <div
-      className="bg-secondary rounded-3xl text-primary py-16 px-8"
+      className="bg-secondary rounded-3xl text-primary py-6 md:py-16 px-1 md:px-8"
       id="events">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-5xl titlefont mb-16 text-center">
-          {vertical ? `Our Latest Events` : "Filtered Events"}
+      <div className=" md:max-w-6xl mx-auto">
+        <h2 className="text-5xl titlefont mb-6 md:mb-16 text-center">
+          Our Latest Events
         </h2>
 
         <div className="flex flex-col gap-8 items-center">
@@ -58,8 +58,8 @@ function FilteredEvents({ vertical }) {
               return (
                 <div
                   key={index}
-                  className="flex w-[70%] bg-ternary rounded-xl shadow-lg overflow-hidden">
-                  <div className="w-1/3 h-60">
+                  className="flex flex-col md:flex-row md:w-[70%] bg-ternary rounded-xl shadow-lg overflow-hidden">
+                  <div className="md:w-1/3 h-32 md:h-60">
                     <img
                       src={imageSrc}
                       alt={event.title}
@@ -67,12 +67,12 @@ function FilteredEvents({ vertical }) {
                     />
                   </div>
 
-                  <div className="w-2/3 p-6 flex flex-col justify-between">
-                    <h3 className="text-2xl font-bold text-accent mb-2">
+                  <div className="md:w-2/3 p-6 flex flex-col md:justify-between">
+                    <h3 className="text-lg md:text-2xl font-bold text-accent mb-2">
                       {event.title}
                     </h3>
-                    <div className="flex items-center text-white/80 mb-2">
-                      <span className="mr-4 bg-primary/20 text-center rounded-lg p-1 text-sm">
+                    <div className="flex items-center gap-2 text-xs md:text-sm text-white/80 mb-2">
+                      <span className="md:mr-4 bg-primary/20 text-center rounded-lg p-1 md:p-2">
                         {new Date(
                           `1970-01-01T${event.eventTime}`
                         ).toLocaleTimeString("en-US", {
@@ -81,11 +81,13 @@ function FilteredEvents({ vertical }) {
                           hour12: true,
                         })}
                       </span>
-                      <span className="bg-primary/20 text-center rounded-lg p-1 px-2 text-sm">
+                      <span className="bg-primary/20 text-center rounded-lg p-1 md:p-2 ">
                         {event.location}
                       </span>
                     </div>
-                    <p className="text-white/90 mb-4">{event.description}</p>
+                    <p className="text-white/90 text-sm md:text-base mr-2 mb-4">
+                      {event.description}
+                    </p>
 
                     <div className="flex justify-between items-center">
                       <span className="bg-primary/20 text-center rounded-lg p-1 px-2 text-sm text-white/80">
