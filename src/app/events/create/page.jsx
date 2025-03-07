@@ -61,156 +61,159 @@ function CreateEvent() {
   };
 
   return (
-    <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md mx-auto bg-secondary rounded-xl shadow-lg overflow-hidden">
-        <div className="px-8 py-6">
-          <h2 className="text-4xl font-bold text-accent titlefont text-center mb-6">
-            Create New Event
-          </h2>
+    <div className=" py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+      <h2 className=" text-3xl md:text-5xl md:py-4 font-bold text-accent titlefont text-center mb-6">
+        Create New Event
+      </h2>
+      <div className=" m-auto px-8 py-6 bg-secondary md:w-[70%] rounded-xl shadow-lg overflow-hidden">
+        <form onSubmit={handleSubmit} className="space-y-6 flex flex-col">
+          <div className="flex flex-col md:flex-row md:gap-24 ">
+            {/* Left side 1st half */}
+            <div className="flex flex-col gap-2 md:gap-4 md:w-[50%]">
+              {/* Event Title */}
+              <div>
+                <label className="flex items-center text-sm font-medium text-gray-700 md:mb-2 ">
+                  <Type className="w-4 h-4 mr-2 text-accent" />
+                  Event Title
+                </label>
+                <input
+                  type="text"
+                  name="title"
+                  value={event.title}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-accent rounded-lg  "
+                  placeholder="Enter event title"
+                  required
+                />
+              </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Event Title */}
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Type className="w-4 h-4 mr-2 text-accent" />
-                Event Title
-              </label>
-              <input
-                type="text"
-                name="title"
-                value={event.title}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-accent rounded-lg  "
-                placeholder="Enter event title"
-                required
-              />
-            </div>
+              {/* Event Description */}
+              <div>
+                <label className="flex items-center text-sm font-medium text-gray-700 md:mb-2 ">
+                  <FileText className="w-4 h-4 mr-2 text-accent" />
+                  Description
+                </label>
+                <textarea
+                  name="description"
+                  value={event.description}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full px-4 py-2 border border-accent rounded-lg  "
+                  placeholder="Describe your event"
+                  required
+                />
+              </div>
 
-            {/* Event Description */}
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <FileText className="w-4 h-4 mr-2 text-accent" />
-                Description
-              </label>
-              <textarea
-                name="description"
-                value={event.description}
-                onChange={handleChange}
-                rows={4}
-                className="w-full px-4 py-2 border border-accent rounded-lg  "
-                placeholder="Describe your event"
-                required
-              />
+              {/* Vertical */}
+              <div>
+                <label className="flex items-center text-sm font-medium text-gray-700 md:mb-2 ">
+                  <Users className="w-4 h-4 mr-2 text-accent" />
+                  Vertical
+                </label>
+                <select
+                  name="vertical"
+                  value={event.vertical}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-accent rounded-lg  "
+                  required>
+                  <option value="">Select Vertical</option>
+                  {options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              {/* Event Date */}
+              <div>
+                <label className="flex items-center text-sm font-medium text-gray-700 md:mb-2 ">
+                  <Calendar className="w-4 h-4 mr-2 text-accent" />
+                  Event Date
+                </label>
+                <input
+                  type="date"
+                  name="eventDate"
+                  value={event.eventDate}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-accent rounded-lg  "
+                  required
+                />
+              </div>
             </div>
+            {/* Right side - 2nd half */}
+            <div className="flex flex-col gap-2 md:gap-4 md:w-[50%]">
+              {/* Event Time */}
+              <div>
+                <label className="flex items-center text-sm font-medium text-gray-700 md:mb-2 ">
+                  <Clock className="w-4 h-4 mr-2 text-accent" />
+                  Event Time
+                </label>
+                <input
+                  type="time"
+                  name="eventTime"
+                  value={event.eventTime}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-accent rounded-lg  "
+                  required
+                />
+              </div>
 
-            {/* Vertical */}
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Users className="w-4 h-4 mr-2 text-accent" />
-                Vertical
-              </label>
-              <select
-                name="vertical"
-                value={event.vertical}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-accent rounded-lg  "
-                required>
-                <option value="">Select Vertical</option>
-                {options.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+              {/* Registration Link */}
+              <div>
+                <label className="flex items-center text-sm font-medium text-gray-700 md:mb-2 ">
+                  <Link className="w-4 h-4 mr-2 text-accent" />
+                  Registration Link
+                </label>
+                <input
+                  type="url"
+                  name="link"
+                  value={event.link}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-accent rounded-lg  "
+                  placeholder="Enter registration link"
+                  required
+                />
+              </div>
+              <div>
+                <label className="flex items-center text-sm font-medium text-gray-700 md:mb-2 ">
+                  <MapPin className="w-4 h-4 mr-2 text-accent" />
+                  Location
+                </label>
+                <input
+                  type="text"
+                  name="location"
+                  value={event.location}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-accent rounded-lg  "
+                  placeholder="Enter event location"
+                  required
+                />
+              </div>
+              <div>
+                <label className="flex items-center text-sm font-medium text-gray-700 md:mb-2 ">
+                  <Users className="w-4 h-4 mr-2 text-accent" />
+                  Organized By
+                </label>
+                <input
+                  type="text"
+                  name="organisedBy"
+                  value={event.organisedBy}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-accent rounded-lg  "
+                  placeholder="Enter organizer name"
+                  required
+                />
+              </div>
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className="w-full bg-accent text-white py-2 px-4 rounded-lg hover:scale-105 transition-transform focus:outline-none  focus:ring-orange-500 focus:ring-offset-2  md:w-[50%] duration-200 mt-4 md:ml-1 md:mt-6 flex items-center justify-center">
+                <Clock className="w-4 h-4 mr-2" />
+                Create Event
+              </button>
             </div>
-
-            {/* Event Date */}
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Calendar className="w-4 h-4 mr-2 text-accent" />
-                Event Date
-              </label>
-              <input
-                type="date"
-                name="eventDate"
-                value={event.eventDate}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-accent rounded-lg  "
-                required
-              />
-            </div>
-
-            {/* Event Time */}
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Clock className="w-4 h-4 mr-2 text-accent" />
-                Event Time
-              </label>
-              <input
-                type="time"
-                name="eventTime"
-                value={event.eventTime}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-accent rounded-lg  "
-                required
-              />
-            </div>
-
-            {/* Registration Link */}
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Link className="w-4 h-4 mr-2 text-accent" />
-                Registration Link
-              </label>
-              <input
-                type="url"
-                name="link"
-                value={event.link}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-accent rounded-lg  "
-                placeholder="Enter registration link"
-                required
-              />
-            </div>
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <MapPin className="w-4 h-4 mr-2 text-accent" />
-                Location
-              </label>
-              <input
-                type="text"
-                name="location"
-                value={event.location}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-accent rounded-lg  "
-                placeholder="Enter event location"
-                required
-              />
-            </div>
-            <div>
-              <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
-                <Users className="w-4 h-4 mr-2 text-accent" />
-                Organized By
-              </label>
-              <input
-                type="text"
-                name="organisedBy"
-                value={event.organisedBy}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-accent rounded-lg  "
-                placeholder="Enter organizer name"
-                required
-              />
-            </div>
-            {/* Submit Button */}
-            <button
-              type="submit"
-              className="w-full bg-accent text-white py-2 px-4 rounded-lg hover:bg-slate-500 focus:outline-none  focus:ring-orange-500 focus:ring-offset-2 transition duration-200 flex items-center justify-center">
-              <Clock className="w-4 h-4 mr-2" />
-              Create Event
-            </button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
   );

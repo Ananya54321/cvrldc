@@ -8,7 +8,7 @@ function FilteredEvents({ vertical }) {
 
   const pics = [
     { vertical: "stp", link: "/stp.jpeg" },
-    { vertical: "shared-shelf", link: "/shared.jpg" },
+    { vertical: "shared-shelf", link: "/shared.jpeg" },
     { vertical: "eclectics", link: "/quiz.jpeg" },
     { vertical: "writers-space", link: "/writers.jpg" },
   ];

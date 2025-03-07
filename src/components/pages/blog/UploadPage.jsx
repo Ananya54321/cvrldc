@@ -30,7 +30,10 @@ export default function UploadImageComponent() {
   return (
     <div className="p-5">
       {/* Upload Button */}
-      <CldUploadButton uploadPreset="LDCPage" onUploadAddedAction={handleUpload} />
+      <CldUploadButton
+        uploadPreset="LDCPage"
+        onUploadAddedAction={handleUpload}
+      />
 
       {/* Show Uploaded Image */}
       {imageUrl && (

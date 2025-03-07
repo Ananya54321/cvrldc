@@ -16,7 +16,7 @@ const UpcomingEvents = () => {
     },
     {
       vertical: "shared-shelf",
-      link: "/shared.jpg",
+      link: "/shared.jpeg",
     },
     {
       vertical: "eclectics",
