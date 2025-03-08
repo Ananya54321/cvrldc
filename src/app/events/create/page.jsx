@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { postEvent } from "../../../../actions/eventActions";
 import {
   Calendar,
@@ -11,7 +11,8 @@ import {
   MapPin,
 } from "lucide-react";
 import { toast } from "sonner";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { verifyUser } from "../../../../actions/userActions";
 
 function CreateEvent() {
   const [event, setEvent] = useState({
@@ -30,25 +31,63 @@ function CreateEvent() {
     { label: "Shared Shelf", value: "shared-shelf" },
     { label: "Story Telling and Public Speaking (STP)", value: "stp" },
   ];
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+
+  const setAuthStatus = () => {
+    if (typeof window !== "undefined") {
+      const jwttoken = localStorage.getItem("token");
+      verifyUser(jwttoken).then((res) => {
+        if (res.success) {
+          setIsLoggedIn(true);
+          setUser(JSON.parse(res.user));
+          console.log("User logged in");
+          setToken(jwttoken);
+        } else {
+          setIsLoggedIn(false);
+          router.push("/login");
+          console.log("User not logged in");
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    setAuthStatus();
+  }, []);
+
+  useEffect(() => {
+    console.log("Token updated:", token);
+  }, [token]);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isLoggedIn) {
+      toast.error("Log in to create or edit a blog");
+      router.push("/login");
+      return;
+    }
     console.log(event);
-    const eventDetails = await postEvent({
-      title: event.title.toString().trim(),
-      description: event.description.toString().trim(),
-      vertical: event.vertical.toString().trim(),
-      eventDate: event.eventDate,
-      eventTime: event.eventTime.toString().trim(),
-      organisedBy: event.organisedBy.toString().trim(),
-      location: event.location.toString().trim(),
-      link: event.link.toString().trim(),
-    });
+    const eventDetails = await postEvent(
+      {
+        title: event.title.toString().trim(),
+        description: event.description.toString().trim(),
+        vertical: event.vertical.toString().trim(),
+        eventDate: event.eventDate,
+        eventTime: event.eventTime.toString().trim(),
+        organisedBy: event.organisedBy.toString().trim(),
+        location: event.location.toString().trim(),
+        link: event.link.toString().trim(),
+      },
+      token
+    );
     console.log("Submitting event details:", eventDetails);
 
     if (eventDetails.success) {
       toast.success("Event created successfully");
       console.log(eventDetails.message);
-      redirect("/events/view");
+      router.push("/events/view");
     } else {
       console.log(eventDetails.message);
     }

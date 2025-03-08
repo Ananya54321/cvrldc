@@ -51,7 +51,7 @@ const WhyJoinBento = () => {
   return (
     <section className="bg-primary text-secondary py-20 px-6" id="benefits">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-5xl titlefont font-bold mb-12 tracking-wide">
+        <h2 className="text-3xl md:text-5xl titlefont font-bold mb-12 tracking-wide">
           Why Join <span className="text-accent">LDC?</span>
         </h2>
 
@@ -59,14 +59,18 @@ const WhyJoinBento = () => {
           {benefits.map((item, i) => (
             <BentoGridItem
               key={item.id}
-              title={<span className="text-accent text-2xl">{item.title}</span>}
+              title={
+                <span className="text-accent text-lg md:text-2xl">
+                  {item.title}
+                </span>
+              }
               description={
-                <span className="text-secondary text-xl">
+                <span className="text-secondary text-sm md:text-xl">
                   {item.description}
                 </span>
               }
               header={
-                <div className="flex items-center text-white justify-center w-full h-full min-h-[6rem]  backdrop-blur-md rounded-xl">
+                <div className="flex items-center text-white justify-center w-full md:min-h-[7rem]  backdrop-blur-md rounded-xl">
                   {iconMap[item.icon]}
                 </div>
               }
@@ -80,7 +84,7 @@ const WhyJoinBento = () => {
         </BentoGrid>
 
         <div className="mt-16 max-w-3xl mx-auto text-center">
-          <blockquote className="text-xl italic border-l-4 border-accent pl-6 py-4">
+          <blockquote className="text-base md:text-xl italic border-l-4 border-accent pl-6 py-4">
             "Debate is about the clash of ideas, not people. It is through this
             clash that we refine our thinking and discover truth."
           </blockquote>

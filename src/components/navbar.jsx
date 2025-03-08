@@ -32,6 +32,7 @@ const Navbar = () => {
           <Link href="/gallery">Gallery</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/verticals">Verticals</Link>
+          {/* <Link href="/events">Events</Link> */}
         </div>
         <Link
           href="/login"

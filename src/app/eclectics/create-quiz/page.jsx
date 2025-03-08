@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { addQuiz } from "@/../actions/quizActions";
 import { useRouter } from "next/navigation";
 import QuizDetailsForm from "@/components/pages/eclectics/QuizDetailsForm";
 import QuestionForm from "@/components/pages/eclectics/QuestionForm";
 import { redirect } from "next/navigation";
 import { toast } from "sonner";
+import { verifyUser } from "@/../actions/userActions";
 
 const CreateQuizPage = () => {
   const router = useRouter();
@@ -29,6 +30,9 @@ const CreateQuizPage = () => {
   });
   const [questionIndex, setQuestionIndex] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [token, setToken] = useState("");
+  const [user, setUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Handle input changes for quiz details
   const handleQuizDataChange = (e) => {
@@ -39,6 +43,31 @@ const CreateQuizPage = () => {
         name === "numQuestions" || name === "timeLimit" ? Number(value) : value,
     });
   };
+
+  const setAuthStatus = () => {
+    if (typeof window !== "undefined") {
+      const jwttoken = localStorage.getItem("token");
+      verifyUser(jwttoken).then((res) => {
+        if (res.success) {
+          setIsLoggedIn(true);
+          setUser(JSON.parse(res.user));
+          setToken(jwttoken);
+          console.log("User logged in");
+        } else {
+          console.log("User not logged in");
+          router.push("/login");
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    setAuthStatus();
+  }, []);
+
+  useEffect(() => {
+    console.log("Token updated:", token);
+  }, [token]);
 
   // Handle question text change
   const handleQuestionChange = (e) => {
@@ -178,8 +207,6 @@ const CreateQuizPage = () => {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem("token");
-
       const quizToSubmit = {
         title: quizData.title,
         description: quizData.description,
@@ -196,7 +223,7 @@ const CreateQuizPage = () => {
         toast.error(response.message || "Failed to create quiz");
         console.log(response.message);
         setStep(1);
-        redirect("/login");
+        router.push("/login");
       }
     } catch (err) {
       toast.error("An error occurred");

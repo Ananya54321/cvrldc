@@ -43,6 +43,30 @@ export async function loginUser(username, password) {
     };
   }
 }
+
+export async function verifyUser(token) {
+  try {
+    const decoded = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET);
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return {
+        success: false,
+        message: "User not found",
+      };
+    }
+    return {
+      success: true,
+      message: "User verified",
+      user: JSON.stringify(user),
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: err.message,
+    };
+  }
+}
+
 export async function RegisterUser(username, email, password) {
   try {
     await connectDb();

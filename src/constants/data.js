@@ -109,35 +109,35 @@ export const upcomingEvents = [
 export const achievements = [
   {
     id: 1,
-    name: "Sophia Chen",
-    achievement: "National Debate Championship Finalist",
-    year: "2024",
+    name: "Dhruv Gupta",
+    achievement: "AIR-1 in National Essay Writing Competition",
+    year: "March 2024",
     quote:
-      "The LDC taught me how to articulate my thoughts under pressure and think on my feet.",
-  },
-  {
-    id: 2,
-    name: "Raj Patel",
-    achievement: "Published in Literary Journal 'Perspectives'",
-    year: "2023",
-    quote:
-      "The creative writing workshops helped me find my voice as a writer.",
+      "I was invited by Sardar Patel University to visit Gujarat for the Award Ceremony where I was awarded with the cash prize and a beautiful memento.",
   },
   {
     id: 3,
-    name: "Maria Rodriguez",
-    achievement: "Regional Oratory Contest Winner",
-    year: "2024",
+    name: "Saketh Ram Karri",
+    achievement: "Co-author of the book CLAIRVOYANCE",
+    year: "November 2022",
     quote:
-      "From trembling with stage fright to standing ovations - that's my LDC journey.",
+      "Co-authored the book CLAIRVOYANCE, which was compiled by Manogna Chalasani with SGSH Publication.",
+  },
+  {
+    id: 2,
+    name: "Sisira Koneru",
+    achievement: "Mahatma Gandhi Rashtrabhasha Hindi Prachar Sanstha",
+    year: "2023",
+    quote:
+      "Secured 1st place in the hindi debate category and was awarded with a cash prize.",
   },
   {
     id: 4,
-    name: "Alex Thompson",
-    achievement: "Selected for International Debate Forum",
-    year: "2023",
+    name: "Sathvik Yellani",
+    achievement: "Theatrix event in Udhbhav",
+    year: "2025",
     quote:
-      "The competitive yet supportive environment prepared me for international stages.",
+      "First Prize in Theatrix event in Udhbhav at Vidya Jyothi Institute of Technology",
   },
 ];
 

@@ -33,6 +33,7 @@ export default function UploadImageComponent() {
       <CldUploadButton
         uploadPreset="LDCPage"
         onUploadAddedAction={handleUpload}
+        className="bg-accent text-white px-4 py-2 rounded-md"
       />
 
       {/* Show Uploaded Image */}

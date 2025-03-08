@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { getEvents } from "../../../../actions/eventActions";
+import { getEvents } from "../../../actions/eventActions";
 
 function ViewEvent() {
   const [events, setEvents] = useState([]);
@@ -21,7 +21,7 @@ function ViewEvent() {
   return (
     <div className="min-h-screen bg-secondary p-6">
       <div className="max-w-5xl mx-auto text-secondary">
-        <h1 className="text-3xl font-bold titlefont text-center text-primary mb-6">
+        <h1 className="text-3xl md:text-5xl font-bold titlefont text-center text-primary my-12">
           📅 Upcoming Events
         </h1>
         <div className="space-y-6">

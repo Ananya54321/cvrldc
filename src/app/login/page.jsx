@@ -4,12 +4,13 @@ import { toast } from "sonner";
 import { User, Lock } from "lucide-react";
 import { loginUser } from "../../../actions/userActions";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ function Login() {
           localStorage.setItem("token", data.token);
           localStorage.setItem("user", JSON.stringify(data.user));
         }
-        redirect("/");
+        router.push("/");
       } else {
         toast.error(data.message || "Login failed");
       }

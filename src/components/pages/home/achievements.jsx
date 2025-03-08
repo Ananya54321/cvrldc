@@ -5,7 +5,7 @@ const Achievements = () => {
   return (
     <div className="bg-ternary text-secondary py-16 px-8" id="achievements">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-5xl titlefont mb-16 text-center text-accent">
+        <h2 className="text-3xl md:text-5xl titlefont mb-16 text-center text-accent">
           Achievements of the Club Members
         </h2>
 

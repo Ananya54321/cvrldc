@@ -5,7 +5,7 @@ connectDb()
   .then(() => console.log("Database connected"))
   .catch(() => console.log("Database connection failed"));
 
-export async function postEvent(eventData) {
+export async function postEvent(eventData, token) {
   try {
     const currentEventDate = new Date(eventData.eventDate);
     if (currentEventDate < new Date()) {

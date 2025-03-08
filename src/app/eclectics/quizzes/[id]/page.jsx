@@ -2,9 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getQuizById } from "@/../actions/quizActions";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import LoadingAnimation from "@/components/loading";
 
-const QuizPage = ({ params }) => {
+const QuizPage = () => {
   const router = useRouter();
+  const params = useParams();
   const { id } = params; // Get quiz ID from URL params
 
   const [quiz, setQuiz] = useState(null);
@@ -68,19 +72,9 @@ const QuizPage = ({ params }) => {
 
   if (loading) {
     return (
-      <div className="container mx-auto px-4 py-12 max-w-2xl fade-up">
-        <div className="bg-secondary/30 rounded-lg p-8 animate-pulse">
-          <div className="h-7 bg-accent/20 rounded w-3/4 mb-4"></div>
-          <div className="h-4 bg-accent/20 rounded w-full mb-8"></div>
-          <div className="h-6 bg-accent/20 rounded w-5/6 mb-4"></div>
-          <div className="space-y-4 my-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="h-12 bg-accent/10 rounded-md"></div>
-            ))}
-          </div>
-          <div className="h-10 bg-accent/20 rounded w-1/3 mt-6"></div>
-        </div>
-      </div>
+      <>
+        <LoadingAnimation />
+      </>
     );
   }
 

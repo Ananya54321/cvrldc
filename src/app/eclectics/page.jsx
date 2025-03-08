@@ -1,11 +1,12 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { CalendarDays, PenTool } from "lucide-react";
 import FilteredEvents from "@/components/pages/events/FilteredEvents";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { verifyUser } from "../../../actions/userActions";
 
 // Animation variants
 const fadeInUp = {
@@ -20,6 +21,34 @@ const fadeInUp = {
 export default function EclecticsPage() {
   const vertical = "eclectics";
   const heroRef = useRef();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+  const [token, setToken] = useState("");
+
+  const setAuthStatus = () => {
+    if (typeof window !== "undefined") {
+      const jwttoken = localStorage.getItem("token");
+      verifyUser(jwttoken).then((res) => {
+        if (res.success) {
+          setIsLoggedIn(true);
+          setUser(JSON.parse(res.user));
+          console.log("User logged in");
+          setToken(jwttoken);
+        } else {
+          setIsLoggedIn(false);
+          console.log("User not logged in");
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    setAuthStatus();
+  }, []);
+
+  useEffect(() => {
+    console.log("Token updated:", token);
+  }, [token]);
 
   // Parallax effect for hero section
   useEffect(() => {
@@ -60,7 +89,7 @@ export default function EclecticsPage() {
             initial="hidden"
             animate="visible"
             variants={fadeInUp}>
-            <Badge className="mb-4 bg-accent/20 text-accent hover:bg-accent/30 px-4 py-1 text-sm">
+            <Badge className="mb-4 bg-accent/20 text-accent hover:scale-105 transition-transform px-4 py-1 text-sm">
               Explore • Create • Connect
             </Badge>
             <h1 className="titlefont text-6xl md:text-7xl mb-4 text-accent">
@@ -79,24 +108,27 @@ export default function EclecticsPage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-accent hover:bg-accent/80 text-primary">
+                variant="primary"
+                className="bg-accent hover:scale-105 transition-transform text-primary">
                 <Link href="#events" className="flex items-center gap-2">
                   <CalendarDays size={20} />
                   Explore Events
                 </Link>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="border-accent bg-primary text-accent hover:bg-accent/10 hover:text-accent">
-                <Link
-                  href="/eclectics/create-quiz"
-                  className="flex items-center gap-2">
-                  <PenTool size={20} />
-                  Create Quiz
-                </Link>
-              </Button>
+              {isLoggedIn && (
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="border-accent bg-primary text-accent hover:scale-105 transition-transform hover:text-accent">
+                  <Link
+                    href="/eclectics/create-quiz"
+                    className="flex items-center gap-2">
+                    <PenTool size={20} />
+                    Create Quiz
+                  </Link>
+                </Button>
+              )}
             </div>
           </motion.div>
         </div>
@@ -127,7 +159,7 @@ export default function EclecticsPage() {
             viewport={{ once: true, margin: "-100px" }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div>
-                <Badge className="mb-4 bg-accent/20 text-accent hover:bg-accent/30">
+                <Badge className="mb-4 bg-accent/20 text-accent hover:scale-105 transition-transform">
                   Interactive
                 </Badge>
                 <h2 className="titlefont text-4xl mb-4 text-accent">
@@ -139,16 +171,22 @@ export default function EclecticsPage() {
                   pop culture, we have something for everyone.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <Button
-                    asChild
-                    className="bg-accent hover:bg-white/30 hover:text-white text-primary">
-                    <Link href="/eclectics/create-quiz">Create a Quiz</Link>
-                  </Button>
+                  {isLoggedIn && (
+                    <Button
+                      asChild
+                      variant="primary"
+                      className="bg-accent hover:scale-105 transition-transform text-primary">
+                      <Link href="/eclectics/create-quiz">Create a Quiz</Link>
+                    </Button>
+                  )}
                   <Button
                     asChild
                     variant="primary"
-                    className="border-white text-white bg-ternary hover:bg-white/30">
-                    <Link href="/eclectics/quizzes">Take a Quiz</Link>
+                    className="border-white text-white bg-ternary hover:scale-105 transition-transform">
+                    <Link
+                      href={`${isLoggedIn ? "/eclectics/quizzes" : "/login"}`}>
+                      Take a Quiz
+                    </Link>
                   </Button>
                 </div>
               </div>
