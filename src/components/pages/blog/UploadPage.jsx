@@ -1,48 +1,33 @@
 "use client";
-
+import { CldUploadWidget } from "next-cloudinary";
 import { useState } from "react";
-import { CldUploadButton, getCldImageUrl } from "next-cloudinary";
 
-export default function UploadImageComponent() {
-  const [publicId, setPublicId] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-
-  // Handle Upload Success
-  const handleUpload = (result) => {
-    console.log("Upload Result:", result);
-
-    if (result.event === "upload-added") {
-      const uploadedPublicId = result.info.public_id;
-      setPublicId(uploadedPublicId);
-
-      // Generate Cloudinary URL
-      const url = getCldImageUrl({
-        width: 960,
-        height: 600,
-        src: uploadedPublicId, // Use the uploaded image's Public ID
-      });
-
-      setImageUrl(url);
-      console.log(imageUrl);
-    }
-  };
+const UploadPage = ({ onUpload }) => {
+  const [resource, setResource] = useState();
 
   return (
-    <div className="p-5">
-      {/* Upload Button */}
-      <CldUploadButton
-        uploadPreset="LDCPage"
-        onUploadAddedAction={handleUpload}
-        className="bg-accent text-white px-4 py-2 rounded-md"
-      />
-
-      {/* Show Uploaded Image */}
-      {imageUrl && (
-        <div className="mt-5">
-          <p>Uploaded Image:</p>
-          <img src={imageUrl} alt="Uploaded" width={960} height={600} />
-        </div>
-      )}
-    </div>
+    <CldUploadWidget
+      uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME}
+      onSuccess={(result, { widget }) => {
+        const imageUrl = result?.info?.secure_url; 
+        setResource(imageUrl);
+        if (onUpload) {
+          onUpload(imageUrl); 
+        }
+      }}
+      onQueuesEnd={(result, { widget }) => {
+        widget.close();
+      }}
+    >
+      {({ open }) => {
+        function handleOnClick() {
+          setResource(undefined);
+          open();
+        }
+        return <button onClick={handleOnClick}>Upload an Image</button>;
+      }}
+    </CldUploadWidget>
   );
-}
+};
+
+export default UploadPage;
