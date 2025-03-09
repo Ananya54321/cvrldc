@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import connectDB from "../utils/db";
 import User from "../models/user";
 
-export async function addBlog(title, content, token) {
+export async function addBlog(title, content, token,image) {
   try {
     await connectDB();
     console.log(token);
@@ -13,7 +13,7 @@ export async function addBlog(title, content, token) {
     }
     const decoded = await jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET);
     const createdBy = decoded.id;
-    const blog = new Blog({ title, content, createdBy });
+    const blog = new Blog({ title, content, createdBy,image });
     await blog.save();
     return { success: true, message: "Blog added successfully" };
   } catch (err) {
@@ -58,7 +58,7 @@ export async function deleteBlog(id, token) {
   }
 }
 
-export async function updateBlog(id, title, content, token) {
+export async function updateBlog(id, title, content, token,image) {
   try {
     await connectDB();
     console.log(token);
@@ -79,6 +79,7 @@ export async function updateBlog(id, title, content, token) {
     }
     blog.title = title;
     blog.content = content;
+    blog.image=image;
     await blog.save();
     return { success: true, message: "Blog updated successfully" };
   } catch (err) {

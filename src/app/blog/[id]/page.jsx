@@ -36,11 +36,11 @@ function ViewBlog({ params }) {
             <div className="lg:w-1/2">
               <img
                 src={
-                  blog.imageUrl ||
+                  blog.image ||
                   "https://images.unsplash.com/photo-1527474305487-b87b222841cc?q=80&w=1974"
                 }
                 alt={blog.title}
-                className="w-full h-[300px] lg:h-full object-cover"
+                className="w-[550px] h-[870px] lg:h-full object-cover"
               />
             </div>
 

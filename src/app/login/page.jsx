@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { User, Lock } from "lucide-react";
 import { loginUser } from "../../../actions/userActions";
@@ -11,6 +11,12 @@ function Login() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      router.push("/");
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +31,7 @@ function Login() {
           localStorage.setItem("user", JSON.stringify(data.user));
         }
         router.push("/");
+        window.location.reload();
       } else {
         toast.error(data.message || "Login failed");
       }

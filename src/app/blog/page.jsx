@@ -22,6 +22,11 @@ const page = () => {
   const [token, setToken] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
+  const [image, setImage] = useState("");
+
+  const handleImageUpload = (url) => {
+    setImage(url); // Store the uploaded image URL
+  };
 
   const setAuthStatus = () => {
     if (typeof window !== "undefined") {
@@ -107,9 +112,9 @@ const page = () => {
 
     let res;
     if (editingBlogId) {
-      res = await updateBlog(editingBlogId, title, content, token);
+      res = await updateBlog(editingBlogId, title, content, token,image);
     } else {
-      res = await addBlog(title, content, token);
+      res = await addBlog(title, content, token,image);
     }
 
     if (res.success) {
@@ -117,12 +122,14 @@ const page = () => {
       setContent("");
       setIsModalOpen(false);
       setEditingBlogId(null);
+      setImage("");
       toast.success(res.message);
       fetchBlogs();
     } else {
       toast.error(res.message);
     }
   };
+
 
   return (
     <div className="min-h-screen text-sm md:text-base bg-[#ECDEBC]">
@@ -163,7 +170,7 @@ const page = () => {
             {blogs.map((blog) => (
               <div
                 key={blog._id}
-                className="bg-[#352C21] rounded-lg overflow-hidden shadow-xl transition-transform duration-300 hover:scale-102">
+                className="bg-[#352C21] rounded-lg max-w-[400px] overflow-hidden shadow-xl transition-transform duration-300 hover:scale-102">
                 <div className="p-6">
                   {/* Author Info */}
                   <div className="flex items-center mb-4">
@@ -193,6 +200,9 @@ const page = () => {
                   </div>
 
                   {/* Blog Content */}
+                  <div className="mb-6 ">
+                  <img src={blog.image} className="rounded-sm " alt={blog.title} />
+                  </div>
                   <h3 className="text-xl md:text-2xl font-bold text-[#BF8B41] mb-3">
                     {blog.title}
                   </h3>
@@ -259,7 +269,7 @@ const page = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="p-6 space-y-6">
-              <UploadPage />
+              <UploadPage onUpload={handleImageUpload} />
               <div className="space-y-2">
                 <label
                   htmlFor="title"
