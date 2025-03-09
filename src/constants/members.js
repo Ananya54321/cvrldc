@@ -189,7 +189,7 @@ export const teamMembers = [
     LinkedIn:
       "https://www.linkedin.com/in/devendra-dhoni-81b908335?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
     Designation: "Photography ",
-    Category: "Photography Team",
+    Category: "Photography",
     photo: "https://drive.google.com/open?id=1Fr4FfSUSCrCUpaDisIXtSrdliHWaev6c",
   },
   {

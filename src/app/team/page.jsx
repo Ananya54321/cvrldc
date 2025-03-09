@@ -28,7 +28,7 @@ const TeamPage = () => {
     "Graphic Design Team",
     "Social Media Team",
     "Logistics Team",
-    "Photography Team",
+    "Photography",
     "STP Vertical",
     "Eclectics Vertical",
     "Writer's Space Vertical",
