@@ -250,7 +250,7 @@ export const teamMembers = [
     Instagram: "https://www.instagram.com/gnanasiri_reddy/",
     LinkedIn: "https://www.linkedin.com/in/gnana-siri-kondakindi-013236280/",
     Designation: "Social media",
-    Category: "Social media Team",
+    Category: "Social Media Team",
     photo:
       "https://drive.google.com/uc?export=view&id=1Qqe2hMqOnyxtbSq-IE_c99VriZCOtl6v",
   },
@@ -261,7 +261,7 @@ export const teamMembers = [
       "https://www.instagram.com/manu_manaswini02?igsh=NTg1cTZrZjB4MjA3",
     LinkedIn: "https://in.linkedin.com/in/manaswini-pachimadla-3684b0290",
     Designation: "Social media",
-    Category: "Social media Team",
+    Category: "Social Media Team",
     photo: "https://drive.google.com/open?id=1ky0ovod97dUBeN0mPf31KOe_buSOJCv9",
   },
   {
