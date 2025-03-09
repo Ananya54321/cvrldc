@@ -1,0 +1,21 @@
+:root {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: light;
+    background-color: #fffbeb;
+  }
+  
+  .modalOverlay {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+  }
+  
+  .modalOverlayAfterOpen {
+    opacity: 1;
+  }
+  
+  .modalOverlayBeforeClose {
+    opacity: 0;
+  }
+  
