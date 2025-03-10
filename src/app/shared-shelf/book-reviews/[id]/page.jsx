@@ -7,8 +7,8 @@ import {
   createComment,
 } from "@/../actions/communityPostActions";
 import { toast } from "sonner";
-import PostCard from "@/components/pages/community/postCard";
-import PostForm from "@/components/pages/community/postForm";
+import PostCard from "@/components/pages/community/PostCard";
+import PostForm from "@/components/pages/community/PostForm";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
 import { verifyUser } from "@/../actions/userActions";
