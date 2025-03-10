@@ -10,7 +10,7 @@ export default function CommunityCard({ community, currentUser }) {
     currentUser && community.admin && community.admin._id === currentUser._id;
 
   return (
-    <Link href={`/community/${community._id}`}>
+    <Link href={`/shared-shelf/book-reviews/${community._id}`}>
       <div className="group border border-neutral-200 p-6 bg-white hover:border-black transition-colors">
         <h3 className="text-xl font-medium text-black">{community.name}</h3>
         <p className="text-neutral-600 mt-2 text-sm">{community.description}</p>

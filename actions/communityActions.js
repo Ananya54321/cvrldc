@@ -45,11 +45,11 @@ export async function createCommunity(communityData, token) {
     }
 
     const decoded = jwt.decode(token);
-    if (!decoded || !decoded.user) {
+    if (!decoded) {
       throw new Error("Invalid authentication token");
     }
 
-    const user = await User.findById(decoded.user);
+    const user = await User.findById(decoded.id);
     if (!user) {
       throw new Error("User not found");
     }

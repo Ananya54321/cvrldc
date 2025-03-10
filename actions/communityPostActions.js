@@ -74,7 +74,7 @@ export async function createPost(communityId, postData, token) {
     }
 
     const decoded = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET);
-    const user = await User.findById(decoded.user);
+    const user = await User.findById(decoded.id);
     if (!user) {
       throw new Error("User not found");
     }
@@ -142,11 +142,11 @@ export async function createComment(postId, newComment, token) {
     }
 
     const decoded = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET);
-    if (!decoded || !decoded.user) {
+    if (!decoded || !decoded.id) {
       throw new Error("Invalid authentication token");
     }
 
-    const user = await User.findById(decoded.user);
+    const user = await User.findById(decoded.id);
     if (!user) {
       throw new Error("User not found");
     }
