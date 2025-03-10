@@ -88,7 +88,7 @@ const Navbar = () => {
             </button>
           ) : (
             <Link
-              href="/join-us"
+              href="/login"
               className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90"
               onClick={() => setIsOpen(false)}>
               Join us
