@@ -23,6 +23,7 @@ export const getGalleries = async () => {
 
 export const createGallery = async (event) => {
   try {
+    console.log(event.images);
     const gallery = new Gallery({
       title: event.title,
       images: event.images,

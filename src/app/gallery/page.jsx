@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Modal from "react-modal";
 import { format } from "date-fns";
@@ -15,53 +15,101 @@ const VERTICAL_TYPES = {
   ECLETICS: "eclectics",
   WRITER_SPACE: "writer space",
 };
-
 const ImageCarousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const itemWidth = 500; // Width of each card
+  const gap = 24; // Gap between cards
+  const totalWidth = itemWidth + gap;
 
   useEffect(() => {
-    if (!images || images.length <= 1) return;
+    if (!images?.length) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setCurrentIndex((prev) => {
+        const next = prev + 1;
+        if (next >= images.length) {
+          return 0;
+        }
+        return next;
+      });
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images]);
 
   if (!images?.length) return null;
 
   return (
-    <div className="relative w-full h-64 overflow-hidden">
-      <AnimatePresence initial={false}>
-        <motion.img
-          key={currentIndex}
-          src={images[currentIndex]}
-          alt="Event"
-          className="absolute w-full h-full object-cover"
-          initial={{ opacity: 0, x: 300 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -300 }}
-          transition={{ duration: 0.5 }}
-        />
-      </AnimatePresence>
-      {images.length > 1 && (
-        <div className="absolute bottom-2 left-0 right-0 flex justify-center gap-1">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              className={`w-2 h-2 rounded-full transition-colors ${
-                index === currentIndex ? "bg-white" : "bg-white/50"
-              }`}
-              onClick={() => setCurrentIndex(index)}
-            />
+    <div className="relative w-full h-[600px] overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800 rounded-[2rem]">
+      <div className="absolute inset-0 flex items-center justify-center">
+        <motion.div 
+          className="flex gap-6 p-8"
+          animate={{ 
+            x: -currentIndex * totalWidth,
+          }}
+          transition={{ 
+            duration: 0.8,
+            ease: "easeInOut"
+          }}
+          style={{
+            width: `${images.length * totalWidth}px`,
+          }}
+        >
+          {images.map((image, idx) => (
+            <motion.div
+              key={`${idx}`}
+              className="relative w-[500px] h-[500px] flex-shrink-0 rounded-2xl overflow-hidden shadow-[0_48px_100px_0_rgba(17,12,46,0.15)] transform-gpu group"
+              initial={{ scale: 0.95, opacity: 0.5 }}
+              animate={{ 
+                scale: 1,
+                opacity: 1,
+              }}
+              transition={{
+                duration: 0.4,
+                ease: "easeOut"
+              }}
+            >
+              <motion.img
+                src={image}
+                alt="Event"
+                className="w-full h-full object-cover scale-110 group-hover:scale-105 transition-transform duration-700"
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1.05 }}
+                transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-8">
+                <motion.div
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-white"
+                >
+                  <h3 className="text-3xl font-medium mb-2">Literary Event</h3>
+                  <p className="text-gray-200 text-lg">Discover the power of words</p>
+                </motion.div>
+              </div>
+            </motion.div>
           ))}
-        </div>
-      )}
+        </motion.div>
+      </div>
+      
+      <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-3 z-10">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              index === currentIndex
+                ? "w-8 bg-white" 
+                : "w-1.5 bg-white/40 hover:bg-white/60"
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
-
 const Page = () => {
   const [events, setEvents] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -111,6 +159,7 @@ const Page = () => {
     }
 
     try {
+      console.log("images",newEvent.images);
       const res = await createGallery(newEvent); // Send newEvent with images
       console.log("Created gallery response:", res);
 
@@ -134,42 +183,49 @@ const Page = () => {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-amber-50 ">
-      <div className="max-w-3xl mx-auto px-4 py-12 text-gray-900">
-        <header className="bg-amber-800 text-white py-8 text-center mb-6">
-          <h1 className="text-4xl font-serif">Literary and Debate Club</h1>
-          <p className="mt-2 text-amber-100">
+   return (
+    <div className="min-h-screen bg-gradient-to-b bg-amber-50">
+      <div className="max-w-6xl mx-auto px-4 py-12 text-gray-900">
+        <header className="bg-gradient-to-r from-amber-800 to-amber-700 text-white py-12 text-center mb-12 rounded-3xl shadow-xl">
+          <h1 className="text-5xl font-serif mb-3">Literary and Debate Club</h1>
+          <p className="text-amber-100 text-lg">
             Where words come alive and ideas take flight
           </p>
         </header>
 
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-serif text-amber-800">Recent Events</h2>
+        <div className="flex justify-between items-center mb-12">
+          <h2 className="text-4xl font-serif text-amber-800">Recent Events</h2>
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-amber-800 text-white px-4 py-2 rounded hover:bg-amber-900 transition-colors">
+            className="bg-amber-800 text-white px-8 py-4 rounded-2xl hover:bg-amber-900 transition-colors text-lg font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
+          >
             Add Event
           </button>
         </div>
 
-        <motion.div className="space-y-6">
+        <motion.div className="space-y-16">
           <AnimatePresence>
             {displayedEvents.map((event) => (
               <motion.div
                 key={event.id}
-                className="bg-white rounded-lg shadow-lg overflow-hidden">
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -40 }}
+                className="overflow-hidden"
+              >
                 <ImageCarousel images={event.images} />
-                <div className="p-6">
-                  <h3 className="text-2xl font-serif text-amber-800 mb-3">
+                <div className="mt-8 px-8">
+                  <h3 className="text-3xl font-serif text-amber-800 mb-4">
                     {event.title}
                   </h3>
-                  <p className="text-gray-600 text-sm mb-3">
-                    {format(new Date(event.date), "MMMM dd, yyyy")}
-                  </p>
-                  <span className="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
-                    {event.vertical}
-                  </span>
+                  <div className="flex items-center gap-4">
+                    <p className="text-gray-600 text-lg">
+                      {format(new Date(event.date), "MMMM dd, yyyy")}
+                    </p>
+                    <span className="inline-block bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">
+                      {event.vertical}
+                    </span>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -177,10 +233,11 @@ const Page = () => {
         </motion.div>
 
         {Object.keys(events).length > 5 && !showAll && (
-          <div className="text-center mt-8">
+          <div className="text-center mt-12">
             <button
               onClick={() => setShowAll(true)}
-              className="text-amber-800 hover:text-amber-900 font-medium">
+              className="text-amber-800 hover:text-amber-900 font-medium text-lg underline-offset-4 hover:underline"
+            >
               View All Events
             </button>
           </div>
@@ -189,33 +246,34 @@ const Page = () => {
         <Modal
           isOpen={isModalOpen}
           onRequestClose={() => setIsModalOpen(false)}
-          ariaHideApp={false}
-          className="max-w-lg mx-auto mt-20 bg-white rounded-lg p-6"
-          overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <h2 className="text-2xl font-serif text-amber-800 mb-6">
+          className="max-w-xl mx-auto mt-20 bg-white rounded-3xl p-10 shadow-2xl"
+          overlayClassName="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center"
+        >
+          <h2 className="text-3xl font-serif text-amber-800 mb-8">
             Add New Event
           </h2>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Title</label>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block text-gray-700 mb-2 text-lg">Title</label>
               <input
                 type="text"
                 value={newEvent.title}
                 onChange={(e) =>
                   setNewEvent({ ...newEvent, title: e.target.value })
                 }
-                className="w-full border rounded px-3 py-2"
+                className="w-full border-2 border-amber-100 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
                 required
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Vertical</label>
+            <div>
+              <label className="block text-gray-700 mb-2 text-lg">Vertical</label>
               <select
                 value={newEvent.vertical}
                 onChange={(e) =>
                   setNewEvent({ ...newEvent, vertical: e.target.value })
                 }
-                className="w-full border rounded px-3 py-2">
+                className="w-full border-2 border-amber-100 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
+              >
                 {Object.values(VERTICAL_TYPES).map((type) => (
                   <option key={type} value={type}>
                     {type}
@@ -223,15 +281,15 @@ const Page = () => {
                 ))}
               </select>
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Date</label>
+            <div>
+              <label className="block text-gray-700 mb-2 text-lg">Date</label>
               <input
                 type="date"
                 value={newEvent.date}
                 onChange={(e) =>
                   setNewEvent({ ...newEvent, date: e.target.value })
                 }
-                className="w-full border rounded px-3 py-2"
+                className="w-full border-2 border-amber-100 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
                 required
               />
             </div>
@@ -249,7 +307,8 @@ const Page = () => {
 
             <button
               type="submit"
-              className="bg-amber-800 text-white px-4 py-2 rounded hover:bg-amber-900 transition-colors">
+              className="w-full bg-amber-800 text-white px-6 py-4 rounded-xl hover:bg-amber-900 transition-all text-lg font-medium mt-8 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+            >
               Add Event
             </button>
           </form>

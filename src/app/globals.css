@@ -40,6 +40,10 @@ body {
 .border-accent {
   border-color: #bf8b41;
 }
+.perspective {
+  perspective: 2000px;
+  transform-style: preserve-3d;
+}
 
 @layer base {
   :root {

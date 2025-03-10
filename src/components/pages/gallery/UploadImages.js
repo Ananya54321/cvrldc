@@ -3,6 +3,7 @@ import { useState } from "react";
 
 const UploadPage = ({ onUpload }) => {
   const [resources, setResources] = useState([]); // Store multiple images
+  console.log("resources",resources);
 
   return (
     <CldUploadWidget
