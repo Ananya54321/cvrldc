@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import logo from "@/../public/cvrldclogo.svg";
@@ -51,7 +51,7 @@ const Navbar = () => {
           <Link href="/blog">Blog</Link>
           <Link href="/verticals">Verticals</Link>
         </div>
-        
+
         {isLoggedIn ? (
           <button
             onClick={handleLogout}
@@ -75,11 +75,21 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden absolute top-16 left-0 w-full bg-white shadow-md py-4 flex flex-col items-center space-y-4">
-          <Link href="/" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link href="/team" onClick={() => setIsOpen(false)}>Team</Link>
-          <Link href="/gallery" onClick={() => setIsOpen(false)}>Gallery</Link>
-          <Link href="/blog" onClick={() => setIsOpen(false)}>Blog</Link>
-          <Link href="/verticals" onClick={() => setIsOpen(false)}>Verticals</Link>
+          <Link href="/" onClick={() => setIsOpen(false)}>
+            Home
+          </Link>
+          <Link href="/team" onClick={() => setIsOpen(false)}>
+            Team
+          </Link>
+          <Link href="/gallery" onClick={() => setIsOpen(false)}>
+            Gallery
+          </Link>
+          <Link href="/blog" onClick={() => setIsOpen(false)}>
+            Blog
+          </Link>
+          <Link href="/verticals" onClick={() => setIsOpen(false)}>
+            Verticals
+          </Link>
           {isLoggedIn ? (
             <button
               onClick={handleLogout}

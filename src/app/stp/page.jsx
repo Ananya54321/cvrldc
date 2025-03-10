@@ -61,7 +61,7 @@ export default function STPPage() {
             initial="hidden"
             animate="visible"
             variants={fadeInUp}>
-            <Badge className="mb-4 bg-accent/20 text-accent hover:bg-accent/30 px-4 py-1 text-sm">
+            <Badge className="mb-4 bg-accent/20 text-accent hover:scale-105 transition-transform  px-4 py-1 text-sm">
               Inspire • Engage • Communicate
             </Badge>
             <h1 className="titlefont text-6xl md:text-7xl mb-4 text-accent">
@@ -78,23 +78,24 @@ export default function STPPage() {
             <div className="flex flex-wrap justify-center gap-4">
               <Button
                 asChild
+                variant="primary"
                 size="lg"
-                className="bg-accent hover:bg-accent/80 text-primary">
+                className="bg-accent hover:scale-105 transition-transform  text-primary">
                 <Link href="#events" className="flex items-center gap-2">
                   <CalendarDays size={20} />
                   Explore Events
                 </Link>
               </Button>
-              <Button
+              {/* <Button
                 asChild
-                variant="outline"
+                variant="primary"
                 size="lg"
-                className="border-accent bg-primary text-accent hover:bg-accent/10 hover:text-accent">
+                className="border-accent bg-primary text-accent hover:scale-105 transition-transform  ">
                 <Link href="/stp/projects" className="flex items-center gap-2">
                   <FlaskRound size={20} />
                   View Projects
                 </Link>
-              </Button>
+              </Button> */}
             </div>
           </motion.div>
         </div>
@@ -125,7 +126,7 @@ export default function STPPage() {
             viewport={{ once: true, margin: "-100px" }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div>
-                <Badge className="mb-4 bg-accent/20 text-accent hover:bg-accent/30">
+                <Badge className="mb-4 bg-accent/20 text-accent hover:scale-105 transition-transform ">
                   Innovations
                 </Badge>
                 <h2 className="titlefont text-4xl mb-4 text-accent">
@@ -138,17 +139,18 @@ export default function STPPage() {
                   shaping our future.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <Button
-                    asChild
-                    className="bg-accent hover:bg-white/30 hover:text-white text-primary">
-                    <Link href="/stp/projects">View Projects</Link>
-                  </Button>
-                  <Button
+                  {/* <Button
                     asChild
                     variant="primary"
-                    className="border-white text-white bg-ternary hover:bg-white/30">
+                    className="bg-accent hover:scale-105 transition-transform border text-primary">
+                    <Link href="/stp/projects">View Projects</Link>
+                  </Button> */}
+                  {/* <Button
+                    asChild
+                    variant="primary"
+                    className="border-white text-white bg-ternary hover:scale-105 transition-transform">
                     <Link href="/stp/submit-project">Submit Project</Link>
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
               <div className="hidden md:block">
@@ -187,7 +189,7 @@ export default function STPPage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true, margin: "-100px" }}>
-            <Badge className="mb-4 bg-accent/20 text-accent hover:bg-accent/30">
+            <Badge className="mb-4 bg-accent/20 text-accent hover:scale-105 transition-transform ">
               Administration
             </Badge>
             <h2 className="titlefont text-4xl mb-4 text-accent">

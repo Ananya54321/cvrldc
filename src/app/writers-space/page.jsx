@@ -90,9 +90,9 @@ export default function WritersSpacePage() {
               </Button>
               <Button
                 asChild
-                variant="outline"
+                variant="primary"
                 size="lg"
-                className="border-accent bg-primary text-accent hover:scale-105 transition-transform hover:text-accent">
+                className="border-accent bg-primary text-accent hover:scale-105 transition-transform border">
                 <Link href="/blog" className="flex items-center gap-2">
                   <PenTool size={20} />
                   Submit Work
@@ -142,7 +142,8 @@ export default function WritersSpacePage() {
                 <div className="flex flex-wrap gap-4">
                   <Button
                     asChild
-                    className="bg-accent hover:scale-105 transition-transformhover:text-white text-primary">
+                    variant="primary"
+                    className="bg-accent hover:scale-105 transition-transform  text-primary">
                     <Link
                       href="https://nationalcentreforwriting.org.uk/get-involved/writers/resources/?gad_source=1&gclid=Cj0KCQiAlbW-BhCMARIsADnwasplwosKXmKvp0_D-K67ZPT2UJURGB862nmPt8_mntM366OjcqonNYEaArzyEALw_wcB"
                       target="_blank">

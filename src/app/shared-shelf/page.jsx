@@ -61,7 +61,7 @@ export default function SharedShelfPage() {
             initial="hidden"
             animate="visible"
             variants={fadeInUp}>
-            <Badge className="mb-4 bg-accent/20 text-accent hover:bg-accent/30 px-4 py-1 text-sm">
+            <Badge className="mb-4 bg-accent/20 text-accent hover:scale-105 transition-transform px-4 py-1 text-sm">
               Read • Share • Discover
             </Badge>
             <h1 className="titlefont text-6xl md:text-7xl mb-4 text-accent">
@@ -78,8 +78,9 @@ export default function SharedShelfPage() {
             <div className="flex flex-wrap justify-center gap-4">
               <Button
                 asChild
+                variant="primary"
                 size="lg"
-                className="bg-accent hover:bg-accent/80 text-primary">
+                className="bg-accent hover:scale-105 transition-transform text-primary">
                 <Link href="#events" className="flex items-center gap-2">
                   <CalendarDays size={20} />
                   Browse Events
@@ -87,9 +88,9 @@ export default function SharedShelfPage() {
               </Button>
               <Button
                 asChild
-                variant="outline"
+                variant="primary"
                 size="lg"
-                className="border-accent bg-primary text-accent hover:bg-accent/10 hover:text-accent">
+                className="border-accent bg-primary text-accent hover:scale-105 transition-transform ">
                 <Link
                   href="/shared-shelf/recommend"
                   className="flex items-center gap-2">

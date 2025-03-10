@@ -87,7 +87,7 @@ function CreateEvent() {
     if (eventDetails.success) {
       toast.success("Event created successfully");
       console.log(eventDetails.message);
-      router.push("/events/view");
+      router.push("/events");
     } else {
       console.log(eventDetails.message);
     }
