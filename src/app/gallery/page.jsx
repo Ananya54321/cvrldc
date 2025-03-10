@@ -14,6 +14,7 @@ const VERTICAL_TYPES = {
   STP: "STP",
   ECLETICS: "eclectics",
   WRITER_SPACE: "writer space",
+  LDC:"LDC"
 };
 const ImageCarousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);

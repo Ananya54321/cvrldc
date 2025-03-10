@@ -4,6 +4,21 @@ import User from "../models/user";
 import connectDb from "../utils/db";
 import jwt from "jsonwebtoken";
 
+export async function getUser(token) {
+  try {
+    await connectDb();
+    const decoded = jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET);
+    const user = await User.findById(decoded.id).lean();
+    return {
+      success: true,
+      user,
+    };
+  } catch (error) {
+    console.error("Error fetching user:", error);
+    return { success: false, error: error.message };
+  }
+}
+
 export async function loginUser(username, password) {
   try {
     await connectDb();
@@ -67,7 +82,7 @@ export async function verifyUser(token) {
   }
 }
 
-export async function RegisterUser(username, email, password) {
+export async function RegisterUser(username, password) {
   try {
     await connectDb();
     const existingUser = await User.findOne({ username });
@@ -79,7 +94,7 @@ export async function RegisterUser(username, email, password) {
       };
     }
     const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
+    const newUser = new User({ username,  password: hashedPassword });
     await newUser.save();
 
     return {

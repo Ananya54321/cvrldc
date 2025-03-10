@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { RegisterUser } from "../../../actions/userActions";
+import { registerMultipleUsers, RegisterUser } from "../../../actions/userActions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { User, Mail, Lock } from "lucide-react";
@@ -8,17 +8,16 @@ import { User, Mail, Lock } from "lucide-react";
 function Register() {
   const router = useRouter();
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
    
 
     try {
-      const data = await RegisterUser(username, email, password);
+      const data = await RegisterUser(username, password);
       if (data.success) {
         toast.success("User registered successfully");
         router.push("/");
@@ -31,6 +30,7 @@ function Register() {
       setIsLoading(false);
     }
   };
+  
 
   return (
     <div className="bg-ternary text-sm md:text-base min-h-screen py-6 md:py-12 flex justify-center px-4">
@@ -65,23 +65,7 @@ function Register() {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-accent text-sm font-medium">Email</label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-accent" />
-                </div>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3 py-3 bg-[#3d2517] border border-[#e6bc84] rounded-xl 
-                  text-secondary placeholder-[#f5e6d3]/50 focus:outline-none focus:ring-2 focus:ring-[#e6bc84]"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-            </div>
+            
 
             <div className="space-y-2 mb-12">
               <label className="text-accent text-sm font-medium">

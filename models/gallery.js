@@ -12,7 +12,7 @@ const gallerySchema=new mongoose.Schema({
     vertical:{
         type:String,
         required:true,
-        enum:["eclectics","writer space","STP","shared shelf"]
+        enum:["eclectics","writer space","STP","shared shelf","LDC"]
     },
     date:{
         type:Date,
