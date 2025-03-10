@@ -50,6 +50,7 @@ const Navbar = () => {
           <Link href="/gallery">Gallery</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/verticals">Verticals</Link>
+          <Link href="/profile">Profile</Link>
         </div>
 
         {isLoggedIn ? (
@@ -90,6 +91,10 @@ const Navbar = () => {
           <Link href="/verticals" onClick={() => setIsOpen(false)}>
             Verticals
           </Link>
+          <Link href="/profile" onClick={() => setIsOpen(false)}>
+            Profile
+          </Link>
+
           {isLoggedIn ? (
             <button
               onClick={handleLogout}
