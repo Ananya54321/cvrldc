@@ -8,13 +8,14 @@ connectDb()
 export async function postEvent(eventData, token) {
   try {
     const currentEventDate = new Date(eventData.eventDate);
-    if (currentEventDate < new Date()) {
-      return {
-        status: 400,
-        message: "Event date cannot be in the past",
-        success: false,
-      };
-    }
+    // Uncomment this part when deploying, it is commmented for testing purposes
+    // if (currentEventDate < new Date()) {
+    //   return {
+    //     status: 400,
+    //     message: "Event date cannot be in the past",
+    //     success: false,
+    //   };
+    // }
     const newEvent = await Event.create({
       title: eventData.title,
       description: eventData.description,
@@ -107,6 +108,44 @@ export async function updateEventDetails(vertical, title, updatedFields) {
     return {
       success: true,
       message: "Event Updated",
+    };
+  } catch (err) {
+    return {
+      success: false,
+      message: err.message,
+    };
+  }
+}
+
+export async function editStatus(eventId, status) {
+  try {
+    const eventDetails = await Event.findOne({ _id: eventId });
+
+    if (!eventDetails) {
+      return {
+        success: false,
+        message: "Didn't find any events",
+      };
+    }
+
+    if (status === "Completed") {
+      eventDetails.isCompleted = true;
+      eventDetails.isCancelled = false;
+    } else if (status === "Cancelled") {
+      eventDetails.isCancelled = true;
+      eventDetails.isCompleted = false;
+    } else {
+      return {
+        success: false,
+        message: "Invalid status provided",
+      };
+    }
+
+    await eventDetails.save();
+
+    return {
+      success: true,
+      message: `Event marked as ${status}`,
     };
   } catch (err) {
     return {
