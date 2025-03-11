@@ -1,11 +1,12 @@
 "use client";
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Modal from "react-modal";
 import { format } from "date-fns";
 import UploadPage from "@/components/pages/gallery/UploadImages";
 import { createGallery, getGalleries } from "../../../actions/galleryActions";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 // Define Modal Root Element for Accessibility
 
@@ -14,7 +15,7 @@ const VERTICAL_TYPES = {
   STP: "STP",
   ECLETICS: "eclectics",
   WRITER_SPACE: "writer space",
-  LDC:"LDC"
+  LDC: "LDC",
 };
 const ImageCarousel = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,58 +44,48 @@ const ImageCarousel = ({ images }) => {
   return (
     <div className="relative w-full h-[600px] overflow-hidden bg-gradient-to-b from-gray-900 to-gray-800 rounded-[2rem]">
       <div className="absolute inset-0 flex items-center justify-center">
-        <motion.div 
+        <motion.div
           className="flex gap-6 p-8"
-          animate={{ 
+          animate={{
             x: -currentIndex * totalWidth,
           }}
-          transition={{ 
+          transition={{
             duration: 0.8,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
           style={{
             width: `${images.length * totalWidth}px`,
-          }}
-        >
+          }}>
           {images.map((image, idx) => (
             <motion.div
               key={`${idx}`}
               className="relative w-[500px] h-[500px] flex-shrink-0 rounded-2xl overflow-hidden shadow-[0_48px_100px_0_rgba(17,12,46,0.15)] transform-gpu group"
               initial={{ scale: 0.95, opacity: 0.5 }}
-              animate={{ 
+              animate={{
                 scale: 1,
                 opacity: 1,
               }}
               transition={{
                 duration: 0.4,
-                ease: "easeOut"
-              }}
-            >
+                ease: "easeOut",
+              }}>
               <motion.img
                 src={image}
                 alt="Event"
                 className="w-full h-full object-cover scale-110 group-hover:scale-105 transition-transform duration-700"
                 initial={{ scale: 1.1 }}
                 animate={{ scale: 1.05 }}
-                transition={{ duration: 10, repeat: Infinity, repeatType: "reverse" }}
+                transition={{
+                  duration: 10,
+                  repeat: Infinity,
+                  repeatType: "reverse",
+                }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-8">
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-white"
-                >
-                  <h3 className="text-3xl font-medium mb-2">Literary Event</h3>
-                  <p className="text-gray-200 text-lg">Discover the power of words</p>
-                </motion.div>
-              </div>
             </motion.div>
           ))}
         </motion.div>
       </div>
-      
+
       <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-3 z-10">
         {images.map((_, index) => (
           <button
@@ -102,7 +93,7 @@ const ImageCarousel = ({ images }) => {
             onClick={() => setCurrentIndex(index)}
             className={`h-1.5 rounded-full transition-all duration-300 ${
               index === currentIndex
-                ? "w-8 bg-white" 
+                ? "w-8 bg-white"
                 : "w-1.5 bg-white/40 hover:bg-white/60"
             }`}
           />
@@ -160,7 +151,7 @@ const Page = () => {
     }
 
     try {
-      console.log("images",newEvent.images);
+      console.log("images", newEvent.images);
       const res = await createGallery(newEvent); // Send newEvent with images
       console.log("Created gallery response:", res);
 
@@ -184,24 +175,27 @@ const Page = () => {
     }
   };
 
-   return (
-    <div className="min-h-screen bg-gradient-to-b bg-amber-50">
+  return (
+    <div className="min-h-screen bg-gradient-to-b bg-PRIMARY">
       <div className="max-w-6xl mx-auto px-4 py-12 text-gray-900">
-        <header className="bg-gradient-to-r from-amber-800 to-amber-700 text-white py-12 text-center mb-12 rounded-3xl shadow-xl">
-          <h1 className="text-5xl font-serif mb-3">Literary and Debate Club</h1>
-          <p className="text-amber-100 text-lg">
-            Where words come alive and ideas take flight
+        <header className=" text-white py-12 md:pb-24 text-center mb-12 rounded-3xl ">
+          <h1 className="text-3xl md:text-7xl titlefont text-accent mb-3">
+            Gallery
+          </h1>
+          <p className="text-secondary text-lg">
+            Capturing moments, preserving memories, and celebrating the
+            literature, one at a time.
           </p>
         </header>
 
         <div className="flex justify-between items-center mb-12">
-          <h2 className="text-4xl font-serif text-amber-800">Recent Events</h2>
-          <button
+          <h2 className="text-3xl font-medium text-accent">Recent Events</h2>
+          <Button
             onClick={() => setIsModalOpen(true)}
-            className="bg-amber-800 text-white px-8 py-4 rounded-2xl hover:bg-amber-900 transition-colors text-lg font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all"
-          >
+            variant="primary"
+            className="bg-ternary opacity-90 text-white px-4 py-4 md:p-5 hover:scale-105  transition-transform text-lg font-medium shadow-lg">
             Add Event
-          </button>
+          </Button>
         </div>
 
         <motion.div className="space-y-16">
@@ -212,15 +206,12 @@ const Page = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -40 }}
-                className="overflow-hidden"
-              >
+                className="overflow-hidden">
                 <ImageCarousel images={event.images} />
                 <div className="mt-8 px-8">
-                  <h3 className="text-3xl font-serif text-amber-800 mb-4">
-                    {event.title}
-                  </h3>
+                  <h3 className="text-3xl text-accent mb-4">{event.title}</h3>
                   <div className="flex items-center gap-4">
-                    <p className="text-gray-600 text-lg">
+                    <p className="text-secondary text-lg">
                       {format(new Date(event.date), "MMMM dd, yyyy")}
                     </p>
                     <span className="inline-block bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-medium">
@@ -237,8 +228,7 @@ const Page = () => {
           <div className="text-center mt-12">
             <button
               onClick={() => setShowAll(true)}
-              className="text-amber-800 hover:text-amber-900 font-medium text-lg underline-offset-4 hover:underline"
-            >
+              className="text-amber-800 hover:text-amber-900 font-medium text-lg underline-offset-4 hover:underline">
               View All Events
             </button>
           </div>
@@ -247,10 +237,9 @@ const Page = () => {
         <Modal
           isOpen={isModalOpen}
           onRequestClose={() => setIsModalOpen(false)}
-          className="max-w-xl mx-auto mt-20 bg-white rounded-3xl p-10 shadow-2xl"
-          overlayClassName="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center"
-        >
-          <h2 className="text-3xl font-serif text-amber-800 mb-8">
+          className="max-w-xl mx-auto mt-20 bg-white w-[90%] md:w-[50%] rounded-3xl p-10 shadow-2xl"
+          overlayClassName="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center">
+          <h2 className="text-3xl text-accent text-amber-800 mb-8">
             Add New Event
           </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -267,14 +256,15 @@ const Page = () => {
               />
             </div>
             <div>
-              <label className="block text-gray-700 mb-2 text-lg">Vertical</label>
+              <label className="block text-gray-700 mb-2 text-lg">
+                Vertical
+              </label>
               <select
                 value={newEvent.vertical}
                 onChange={(e) =>
                   setNewEvent({ ...newEvent, vertical: e.target.value })
                 }
-                className="w-full border-2 border-amber-100 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all"
-              >
+                className="w-full border-2 border-amber-100 rounded-xl px-4 py-3 focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all">
                 {Object.values(VERTICAL_TYPES).map((type) => (
                   <option key={type} value={type}>
                     {type}
@@ -306,12 +296,11 @@ const Page = () => {
               />
             </div>
 
-            <button
+            <Button
               type="submit"
-              className="w-full bg-amber-800 text-white px-6 py-4 rounded-xl hover:bg-amber-900 transition-all text-lg font-medium mt-8 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-            >
+              className="w-full bg-ternary text-white px-6 py-4  text-lg font-medium mt-8 shadow-lg hover:scale-105 transition-transform">
               Add Event
-            </button>
+            </Button>
           </form>
         </Modal>
       </div>
