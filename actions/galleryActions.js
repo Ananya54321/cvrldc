@@ -20,7 +20,6 @@ export const getGalleries = async () => {
   }
 };
 
-
 export const createGallery = async (event) => {
   try {
     console.log(event.images);
