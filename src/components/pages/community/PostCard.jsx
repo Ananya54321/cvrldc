@@ -25,10 +25,10 @@ export default function PostCard({
   };
 
   return (
-    <Card className="bg-white border-none shadow-lg">
+    <Card className="bg-secondary border-none shadow-lg">
       <CardHeader className="space-y-2">
         <div className="flex items-center space-x-2">
-          <User className="h-5 w-5 text-[#dc2446]" />
+          <User className="h-5 w-5 text-[#9e5c1f]" />
           <span className="text-sm text-gray-600">
             {post.author?.username || "Unknown"}
           </span>
@@ -46,7 +46,7 @@ export default function PostCard({
 
         <div className="mt-6 space-y-4">
           <div className="flex items-center space-x-2">
-            <MessageSquare className="h-5 w-5 text-[#dc2446]" />
+            <MessageSquare className="h-5 w-5 text-[#9e5c1f]" />
             <span className="font-medium text-black">
               Comments ({post.comments?.length || 0})
             </span>
@@ -68,7 +68,7 @@ export default function PostCard({
         {!isCommenting ? (
           <Button
             variant="outline"
-            className="w-full border-[#dc2446] text-[#dc2446] hover:bg-[#dc2446] hover:text-white"
+            className="w-full border-[#9e5c1f] text-[#9e5c1f] hover:bg-[#9e5c1f] hover:text-white"
             onClick={() => onComment(post._id)}>
             <MessageSquare className="h-4 w-4 mr-2" />
             Add Comment
@@ -79,7 +79,7 @@ export default function PostCard({
               placeholder="Write your comment..."
               value={commentText}
               onChange={(e) => setCommentText(e.target.value)}
-              className="w-full min-h-[100px] border-gray-200 focus:border-[#dc2446] focus:ring-[#dc2446]"
+              className="w-full min-h-[100px] bg-white border-gray-200 focus:border-[#9e5c1f] focus:ring-[#9e5c1f]"
             />
             <div className="flex justify-end space-x-2">
               <Button
@@ -90,7 +90,7 @@ export default function PostCard({
               </Button>
               <Button
                 onClick={handleCommentSubmit}
-                className="bg-[#dc2446] text-white hover:bg-[#dc2446]/90">
+                className="bg-[#9e5c1f] text-white hover:bg-[#9e5c1f]/90">
                 Post Comment
               </Button>
             </div>

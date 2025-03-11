@@ -118,9 +118,9 @@ export default function EclecticsPage() {
               {isLoggedIn && (
                 <Button
                   asChild
-                  variant="outline"
+                  variant="primary"
                   size="lg"
-                  className="border-accent bg-primary text-accent hover:scale-105 transition-transform hover:text-accent">
+                  className="border border-yellow-500/40 bg-primary text-accent hover:scale-105 transition-transform hover:text-accent">
                   <Link
                     href="/eclectics/create-quiz"
                     className="flex items-center gap-2">

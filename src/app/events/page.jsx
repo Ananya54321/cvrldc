@@ -26,7 +26,6 @@ function ViewEvent() {
     }
   };
 
-
   const refreshEvents = async () => {
     try {
       const response = await getEvents();
@@ -41,7 +40,6 @@ function ViewEvent() {
     refreshEvents();
   }, []);
 
-
   const handleStatusChange = (eventId, value) => {
     setSelectedStatuses((prev) => ({
       ...prev,
@@ -52,13 +50,13 @@ function ViewEvent() {
   // Handle Status Update
   const handleEdit = async (eventId) => {
     try {
-      const givenStatus = selectedStatuses[eventId]; 
+      const givenStatus = selectedStatuses[eventId];
       if (!givenStatus) {
         alert("Please select a status before updating.");
         return;
       }
 
-      setLoading((prev) => ({ ...prev, [eventId]: true })); 
+      setLoading((prev) => ({ ...prev, [eventId]: true }));
 
       const response = await editStatus(eventId, givenStatus);
 
@@ -73,7 +71,7 @@ function ViewEvent() {
     } catch (err) {
       console.error("Error updating status:", err);
     } finally {
-      setLoading((prev) => ({ ...prev, [eventId]: false })); 
+      setLoading((prev) => ({ ...prev, [eventId]: false }));
     }
   };
 
@@ -84,21 +82,20 @@ function ViewEvent() {
           📅 Upcoming Events
         </h1>
         <div className="space-y-6">
-          {events.length > 0 ? (
+          {loading && events.length > 0 ? (
             events.map((event) => (
               <div
                 key={event._id}
-                className="bg-ternary shadow-md rounded-lg p-6 border border-gray-200"
-              >
+                className="bg-ternary shadow-md rounded-lg p-6 border border-gray-200">
                 <h2 className="text-2xl font-semibold text-accent flex items-center">
                   {event.title}{" "}
                   {event.isCompleted ? (
-                    <span className="ml-2 px-2 py-1 rounded-full bg-green-500 opacity-80">
-                      🟢 Completed
+                    <span className="ml-2 text-xs text-secondary px-2 py-1 rounded-full bg-green-900/70 opacity-80">
+                      Completed
                     </span>
                   ) : event.isCancelled ? (
-                    <span className="ml-2 px-2 py-1 rounded-full bg-yellow-500 opacity-80">
-                      🟡 Cancelled
+                    <span className="ml-2 text-xs text-secondary px-2 py-1 rounded-full bg-yellow-800/70 opacity-80">
+                      Cancelled
                     </span>
                   ) : null}
                 </h2>
@@ -139,23 +136,20 @@ function ViewEvent() {
                       href={event.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block bg-accent text-white px-4 py-2 rounded-lg hover:bg-[#FFA500] transition duration-300"
-                    >
+                      className="inline-block bg-accent text-white px-4 py-2 rounded-lg hover:bg-[#FFA500] transition duration-300">
                       🔗 Visit Event
                     </a>
                   </div>
                 )}
 
-                
-                <div className="mt-6 p-3 bg-gray-800 bg-opacity-30 rounded-lg flex flex-wrap items-center gap-3">
+                <div className="mt-6 p-2 md:p-3 bg-gray-800 bg-opacity-30 rounded-lg flex flex-wrap items-center gap-3">
                   <label className="text-white font-bold">Change Status:</label>
                   <select
                     value={selectedStatuses[event._id] || ""}
                     onChange={(e) =>
                       handleStatusChange(event._id, e.target.value)
                     }
-                    className="p-2 border rounded-md bg-gray-700 text-white"
-                  >
+                    className="p-2 border text-sm rounded-md bg-gray-700 text-white">
                     <option value="" disabled>
                       Select Status
                     </option>
@@ -163,7 +157,6 @@ function ViewEvent() {
                     <option value="Cancelled">Cancelled</option>
                   </select>
 
-                 
                   <button
                     onClick={() => handleEdit(event._id)}
                     className={`px-4 py-2 rounded-md transition ml-auto ${
@@ -171,16 +164,15 @@ function ViewEvent() {
                         ? "bg-gray-600 text-gray-300 cursor-not-allowed"
                         : "bg-accent text-white hover:bg-[#FFA500]"
                     }`}
-                    disabled={loading[event._id]}
-                  >
+                    disabled={loading[event._id]}>
                     {loading[event._id] ? "Updating..." : "Update Status"}
                   </button>
                 </div>
               </div>
             ))
           ) : (
-            <p className="text-center text-white">
-              No upcoming events available.
+            <p className="text-center text-primary">
+              Searching for upcoming events.. Please Hold On
             </p>
           )}
         </div>

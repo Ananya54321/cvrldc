@@ -20,11 +20,11 @@ export default function CreateCommunityModal({ isOpen, onClose, onSubmit }) {
       open={isOpen}
       onClose={onClose}
       className="fixed inset-0 z-50 overflow-y-auto">
-      <div className="flex min-h-screen items-center justify-center p-4">
+      <div className="flex min-h-screen rounded-md items-center justify-center p-4">
         <div className="fixed inset-0 bg-black/40" />
 
-        <div className="relative bg-white p-8 w-full max-w-md">
-          <Dialog.Title className="text-2xl font-bold text-black mb-6">
+        <div className="relative bg-secondary p-8 w-full max-w-md">
+          <Dialog.Title className="text-2xl font-bold text-primary mb-6">
             Create New Community
           </Dialog.Title>
 
@@ -68,7 +68,7 @@ export default function CreateCommunityModal({ isOpen, onClose, onSubmit }) {
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 text-sm font-medium bg-black text-white hover:bg-neutral-900 transition-colors">
+                className="px-4 py-2 text-sm font-medium bg-ternary text-white hover:scale-105 transition-transform">
                 Create Community
               </button>
             </div>

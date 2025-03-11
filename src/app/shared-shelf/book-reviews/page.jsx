@@ -96,8 +96,8 @@ export default function CommunityPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white p-12">
-        <div className="max-w-7xl mx-auto space-y-8">
+      <div className="min-h-screen bg-primary p-12">
+        {/* <div className="max-w-7xl mx-auto space-y-8">
           <div className="space-y-4">
             <Skeleton className="h-12 w-48 mx-auto bg-black/10" />
             <Skeleton className="h-4 w-64 mx-auto bg-black/10" />
@@ -107,24 +107,26 @@ export default function CommunityPage() {
               <Skeleton key={i} className="h-48 w-full bg-black/10" />
             ))}
           </div>
-        </div>
+        </div> */}
+        <p className="text-secondary">Loading.. Please wait</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white py-12 px-4">
+    <div className="min-h-screen bg-primary py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold tracking-tight text-black">
-            Communities
+          <h1 className="text-5xl titlefont md:p-5 font-bold tracking-tight text-accent">
+            Book Discussion Communities
           </h1>
-          <p className="mt-2 text-black/60">
+          <p className="mt-2 text-secondary">
             Join communities and connect with others
           </p>
 
           {/* Always show the button but handle login check when clicked */}
           <Button
+            variant="primary"
             onClick={() => {
               if (isLoggedIn) {
                 setIsCreateModalOpen(true);
@@ -133,23 +135,21 @@ export default function CommunityPage() {
                 router.push("/login");
               }
             }}
-            className="mt-6 bg-black text-white hover:bg-black/90 transition-colors"
+            className="mt-6 bg-ternary text-white hover:scale-105  transition-transform"
             size="lg">
             <Plus className="mr-2 h-4 w-4" />
             Create your own Community
           </Button>
         </div>
 
-        <div className="flex items-center gap-4 mb-8">
-          <Button
-            variant={"ghost"}
-            className={"bg-black text-white hover:bg-black/90"}>
+        <div className="flex items-center gap-4 mb-2">
+          <Button variant={"primary"} className={"bg-accent text-white"}>
             <Compass className="mr-2 h-4 w-4" />
             Explore
           </Button>
         </div>
 
-        <Separator className="mb-8 bg-black/10" />
+        <Separator className="mb-8 bg-white/10" />
 
         {/* Display communities grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

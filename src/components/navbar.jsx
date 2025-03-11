@@ -45,10 +45,10 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-6">
-          <Link href="/">Home</Link>
           <Link href="/team">Team</Link>
           <Link href="/gallery">Gallery</Link>
           <Link href="/blog">Blog</Link>
+          <Link href="/events">Events</Link>
           <Link href="/verticals">Verticals</Link>
           <Link href="/profile">Profile</Link>
         </div>
@@ -56,7 +56,7 @@ const Navbar = () => {
         {isLoggedIn ? (
           <button
             onClick={handleLogout}
-            className="bg-red-500 hidden md:flex text-white px-4 py-2 rounded-lg hover:bg-opacity-90">
+            className=" hover:underline hidden md:flex text-black px-4 py-2 rounded-lg hover:bg-opacity-90">
             Logout
           </button>
         ) : (

@@ -90,9 +90,9 @@ export default function SharedShelfPage() {
                 asChild
                 variant="primary"
                 size="lg"
-                className="border-accent bg-primary text-accent hover:scale-105 transition-transform ">
+                className="border border-yellow-500/40 bg-primary text-accent hover:scale-105  transition-transform ">
                 <Link
-                  href="/shared-shelf/recommend"
+                  href="/shared-shelf/book-reviews"
                   className="flex items-center gap-2">
                   <BookOpen size={20} />
                   Recommend Books

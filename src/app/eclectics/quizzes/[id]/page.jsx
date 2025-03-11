@@ -83,7 +83,7 @@ const QuizPage = () => {
       <div className="container mx-auto px-4 py-12 max-w-2xl text-center">
         <h2 className="text-primary text-xl mb-4">Quiz not found</h2>
         <button
-          className="px-6 py-2 bg-accent text-secondary rounded-lg hover:bg-accent/90 transition-colors"
+          className="px-6 py-2 bg-accent text-secondary rounded-lg hover:scale-105 transition-transform  "
           onClick={() => router.push("/eclectics/quizzes")}>
           Return to Quizzes
         </button>
@@ -155,7 +155,7 @@ const QuizPage = () => {
                               ? "bg-[#f8d7da] border-[#f5c6cb] text-[#721c24]"
                               : "bg-white border-accent/20"
                             : "bg-primary/5 border-accent/20"
-                          : "bg-white hover:bg-accent border-accent/10"
+                          : "bg-white hover:scale-105 transition-transform rder-accent/10"
                       }
                       ${
                         isCorrect !== null ? "cursor-default" : "cursor-pointer"
@@ -194,7 +194,7 @@ const QuizPage = () => {
                     ${
                       isCorrect !== null
                         ? "bg-primary/10 text-primary/60 cursor-not-allowed"
-                        : "bg-primary text-secondary hover:bg-primary/90"
+                        : "bg-primary text-secondary hover:scale-105 transition-transform 0"
                     }`}
                   onClick={handleAnswer}
                   disabled={selectedOption === null || isCorrect !== null}>
@@ -203,7 +203,7 @@ const QuizPage = () => {
 
                 {isCorrect !== null && (
                   <button
-                    className="px-5 py-3 bg-accent text-white rounded-lg font-medium hover:bg-accent/90 transition-colors"
+                    className="px-5 py-3 bg-accent text-white rounded-lg font-medium hover:scale-105 transition-transform  "
                     onClick={handleNextQuestion}>
                     {currentQuestionIndex + 1 < quiz.questions.length
                       ? "Next Question"
